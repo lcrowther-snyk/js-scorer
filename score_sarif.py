@@ -81,11 +81,22 @@ def _fmt_pct(num: float | None) -> str:
 
 def _safe_open_read(path: str) -> str:
     """Resolve and validate a CLI-supplied input path before opening."""
+    if not path or "\x00" in path:
+        log.error("Invalid input path.")
+        sys.exit(1)
     resolved = os.path.realpath(os.path.abspath(path))
     if not os.path.isfile(resolved):
         log.error("Input file not found: %s", resolved)
         sys.exit(1)
     return resolved
+
+
+def _safe_output_dir(path: str) -> str:
+    """Resolve and validate a CLI-supplied output directory path."""
+    if not path or "\x00" in path:
+        log.error("Invalid output directory.")
+        sys.exit(1)
+    return os.path.realpath(os.path.abspath(path))
 
 
 def parse_sarif(path: str) -> tuple[str, str, list[dict]]:
@@ -163,6 +174,7 @@ def load_ground_truth(path: str) -> list[dict]:
 
 def _write_html(result: dict, out_dir: str) -> str:
     """Write a self-contained HTML scorecard and return the output path."""
+    out_dir = _safe_output_dir(out_dir)
     import html as _htm
     from datetime import datetime, timezone
 
@@ -691,8 +703,8 @@ def score(
         "excluded_patterns": exclude_patterns,
     }
 
-    os.makedirs(out_dir, exist_ok=True)
-    resolved_out = os.path.realpath(os.path.abspath(out_dir))
+    resolved_out = _safe_output_dir(out_dir)
+    os.makedirs(resolved_out, exist_ok=True)
 
     # ── Write JSON ───────────────────────────────────────────────────────────
     json_path = os.path.join(resolved_out, "scorecard.json")
