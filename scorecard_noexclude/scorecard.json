@@ -1,0 +1,1286 @@
+{
+  "tool": "SnykCode",
+  "tool_version": "1.1300.2",
+  "sarif": "results.sarif",
+  "ground_truth": "juice-shop-ground-truth.yml",
+  "totals": {
+    "total_findings": 253,
+    "excluded": 193,
+    "informational": 7,
+    "in_scope": 53,
+    "sast_detectable_challenges": 51
+  },
+  "metrics": {
+    "TP": 25,
+    "FP": 40,
+    "FN": 26,
+    "TN": 25,
+    "precision": 0.38461538461538464,
+    "recall": 0.49019607843137253,
+    "f1": 0.43103448275862066,
+    "youden_j": -0.12518853695324283,
+    "specificity": 0.38461538461538464,
+    "TN_formula": "For each FN challenge, each (vulnerable_file, CWE) pair where no finding was emitted counts as one TN (per OWASP Benchmark convention)."
+  },
+  "per_cwe": [
+    {
+      "cwe": "CWE-1287",
+      "TP": 0,
+      "FP": 12,
+      "FN": 0,
+      "precision": 0.0,
+      "recall": null,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-1321",
+      "TP": 0,
+      "FP": 2,
+      "FN": 0,
+      "precision": 0.0,
+      "recall": null,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-200",
+      "TP": 0,
+      "FP": 0,
+      "FN": 2,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-22",
+      "TP": 0,
+      "FP": 0,
+      "FN": 2,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-23",
+      "TP": 6,
+      "FP": 3,
+      "FN": 0,
+      "precision": 0.6666666666666666,
+      "recall": 1.0,
+      "f1": 0.8
+    },
+    {
+      "cwe": "CWE-259",
+      "TP": 0,
+      "FP": 6,
+      "FN": 0,
+      "precision": 0.0,
+      "recall": null,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-284",
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-347",
+      "TP": 0,
+      "FP": 1,
+      "FN": 3,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-352",
+      "TP": 1,
+      "FP": 0,
+      "FN": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "cwe": "CWE-400",
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-434",
+      "TP": 0,
+      "FP": 0,
+      "FN": 2,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-601",
+      "TP": 2,
+      "FP": 0,
+      "FN": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "cwe": "CWE-611",
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-620",
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-639",
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-770",
+      "TP": 0,
+      "FP": 7,
+      "FN": 0,
+      "precision": 0.0,
+      "recall": null,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-776",
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-79",
+      "TP": 6,
+      "FP": 1,
+      "FN": 3,
+      "precision": 0.8571428571428571,
+      "recall": 0.6666666666666666,
+      "f1": 0.75
+    },
+    {
+      "cwe": "CWE-798",
+      "TP": 0,
+      "FP": 6,
+      "FN": 3,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-89",
+      "TP": 7,
+      "FP": 3,
+      "FN": 0,
+      "precision": 0.7,
+      "recall": 1.0,
+      "f1": 0.8235294117647058
+    },
+    {
+      "cwe": "CWE-916",
+      "TP": 1,
+      "FP": 1,
+      "FN": 0,
+      "precision": 0.5,
+      "recall": 1.0,
+      "f1": 0.6666666666666666
+    },
+    {
+      "cwe": "CWE-918",
+      "TP": 1,
+      "FP": 0,
+      "FN": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "cwe": "CWE-94",
+      "TP": 0,
+      "FP": 0,
+      "FN": 3,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-943",
+      "TP": 1,
+      "FP": 4,
+      "FN": 2,
+      "precision": 0.2,
+      "recall": 0.3333333333333333,
+      "f1": 0.25
+    }
+  ],
+  "true_positives": [
+    {
+      "challenge_key": "accessLogDisclosureChallenge",
+      "challenge_name": "Access Log",
+      "findings": [
+        {
+          "rule_id": "javascript/PT",
+          "uri": "routes/logfileServer.ts",
+          "line": 14,
+          "cwes": [
+            "CWE-23"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "christmasSpecialChallenge",
+      "challenge_name": "Christmas Special",
+      "findings": [
+        {
+          "rule_id": "javascript/Sqli",
+          "uri": "routes/search.ts",
+          "line": 23,
+          "cwes": [
+            "CWE-89"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "csrfChallenge",
+      "challenge_name": "CSRF",
+      "findings": [
+        {
+          "rule_id": "javascript/UseCsurfForExpress",
+          "uri": "server.ts",
+          "line": 129,
+          "cwes": [
+            "CWE-352"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "dbSchemaChallenge",
+      "challenge_name": "Database Schema",
+      "findings": [
+        {
+          "rule_id": "javascript/Sqli",
+          "uri": "routes/search.ts",
+          "line": 23,
+          "cwes": [
+            "CWE-89"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "easterEggLevelOneChallenge",
+      "challenge_name": "Easter Egg",
+      "findings": [
+        {
+          "rule_id": "javascript/PT",
+          "uri": "routes/fileServer.ts",
+          "line": 33,
+          "cwes": [
+            "CWE-23"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "ephemeralAccountantChallenge",
+      "challenge_name": "Ephemeral Accountant",
+      "findings": [
+        {
+          "rule_id": "javascript/Sqli",
+          "uri": "routes/login.ts",
+          "line": 34,
+          "cwes": [
+            "CWE-89"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "forgottenBackupChallenge",
+      "challenge_name": "Forgotten Sales Backup",
+      "findings": [
+        {
+          "rule_id": "javascript/PT",
+          "uri": "routes/fileServer.ts",
+          "line": 33,
+          "cwes": [
+            "CWE-23"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "forgottenDevBackupChallenge",
+      "challenge_name": "Forgotten Developer Backup",
+      "findings": [
+        {
+          "rule_id": "javascript/PT",
+          "uri": "routes/fileServer.ts",
+          "line": 33,
+          "cwes": [
+            "CWE-23"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "httpHeaderXssChallenge",
+      "challenge_name": "HTTP-Header XSS",
+      "findings": [
+        {
+          "rule_id": "javascript/XSS",
+          "uri": "frontend/src/app/last-login-ip/last-login-ip.component.ts",
+          "line": 39,
+          "cwes": [
+            "CWE-79"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "localXssChallenge",
+      "challenge_name": "DOM XSS",
+      "findings": [
+        {
+          "rule_id": "javascript/XSS",
+          "uri": "frontend/src/app/search-result/search-result.component.ts",
+          "line": 170,
+          "cwes": [
+            "CWE-79"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "loginAdminChallenge",
+      "challenge_name": "Login Admin",
+      "findings": [
+        {
+          "rule_id": "javascript/Sqli",
+          "uri": "routes/login.ts",
+          "line": 34,
+          "cwes": [
+            "CWE-89"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "loginBenderChallenge",
+      "challenge_name": "Login Bender",
+      "findings": [
+        {
+          "rule_id": "javascript/Sqli",
+          "uri": "routes/login.ts",
+          "line": 34,
+          "cwes": [
+            "CWE-89"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "loginJimChallenge",
+      "challenge_name": "Login Jim",
+      "findings": [
+        {
+          "rule_id": "javascript/Sqli",
+          "uri": "routes/login.ts",
+          "line": 34,
+          "cwes": [
+            "CWE-89"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "misplacedSignatureFileChallenge",
+      "challenge_name": "Misplaced Signature File",
+      "findings": [
+        {
+          "rule_id": "javascript/PT",
+          "uri": "routes/fileServer.ts",
+          "line": 33,
+          "cwes": [
+            "CWE-23"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "noSqlReviewsChallenge",
+      "challenge_name": "NoSQL Manipulation",
+      "findings": [
+        {
+          "rule_id": "javascript/NoSqli",
+          "uri": "routes/updateProductReviews.ts",
+          "line": 17,
+          "cwes": [
+            "CWE-943"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "nullByteChallenge",
+      "challenge_name": "Poison Null Byte",
+      "findings": [
+        {
+          "rule_id": "javascript/PT",
+          "uri": "routes/fileServer.ts",
+          "line": 33,
+          "cwes": [
+            "CWE-23"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "redirectChallenge",
+      "challenge_name": "Allowlist Bypass",
+      "findings": [
+        {
+          "rule_id": "javascript/OR",
+          "uri": "routes/redirect.ts",
+          "line": 19,
+          "cwes": [
+            "CWE-601"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "redirectCryptoCurrencyChallenge",
+      "challenge_name": "Outdated Allowlist",
+      "findings": [
+        {
+          "rule_id": "javascript/OR",
+          "uri": "routes/redirect.ts",
+          "line": 19,
+          "cwes": [
+            "CWE-601"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "reflectedXssChallenge",
+      "challenge_name": "Reflected XSS",
+      "findings": [
+        {
+          "rule_id": "javascript/XSS",
+          "uri": "frontend/src/app/track-result/track-result.component.ts",
+          "line": 48,
+          "cwes": [
+            "CWE-79"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "restfulXssChallenge",
+      "challenge_name": "API-only XSS",
+      "findings": [
+        {
+          "rule_id": "javascript/XSS",
+          "uri": "frontend/src/app/search-result/search-result.component.ts",
+          "line": 170,
+          "cwes": [
+            "CWE-79"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "ssrfChallenge",
+      "challenge_name": "SSRF",
+      "findings": [
+        {
+          "rule_id": "javascript/Ssrf",
+          "uri": "routes/profileImageUrlUpload.ts",
+          "line": 24,
+          "cwes": [
+            "CWE-918"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "unionSqlInjectionChallenge",
+      "challenge_name": "User Credentials",
+      "findings": [
+        {
+          "rule_id": "javascript/Sqli",
+          "uri": "routes/search.ts",
+          "line": 23,
+          "cwes": [
+            "CWE-89"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "usernameXssChallenge",
+      "challenge_name": "CSP Bypass",
+      "findings": [
+        {
+          "rule_id": "javascript/XSS",
+          "uri": "routes/userProfile.ts",
+          "line": 98,
+          "cwes": [
+            "CWE-79"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "weirdCryptoChallenge",
+      "challenge_name": "Weird Crypto",
+      "findings": [
+        {
+          "rule_id": "javascript/InsecureHash",
+          "uri": "lib/insecurity.ts",
+          "line": 43,
+          "cwes": [
+            "CWE-916"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "xssBonusChallenge",
+      "challenge_name": "Bonus Payload",
+      "findings": [
+        {
+          "rule_id": "javascript/XSS",
+          "uri": "frontend/src/app/search-result/search-result.component.ts",
+          "line": 170,
+          "cwes": [
+            "CWE-79"
+          ]
+        }
+      ]
+    }
+  ],
+  "false_positives": [
+    {
+      "rule_id": "javascript/HTTPSourceWithUncheckedType",
+      "uri": "routes/currentUser.ts",
+      "line": 23,
+      "level": "note",
+      "cwes": [
+        "CWE-1287"
+      ]
+    },
+    {
+      "rule_id": "javascript/HTTPSourceWithUncheckedType",
+      "uri": "routes/profileImageUrlUpload.ts",
+      "line": 20,
+      "level": "note",
+      "cwes": [
+        "CWE-1287"
+      ]
+    },
+    {
+      "rule_id": "javascript/InsecureHash",
+      "uri": "Gruntfile.js",
+      "line": 77,
+      "level": "note",
+      "cwes": [
+        "CWE-916"
+      ]
+    },
+    {
+      "rule_id": "javascript/JwtDecodeMethod",
+      "uri": "routes/authenticatedUsers.ts",
+      "line": 20,
+      "level": "warning",
+      "cwes": [
+        "CWE-347"
+      ]
+    },
+    {
+      "rule_id": "javascript/NoHardcodedPasswords",
+      "uri": "models/index.ts",
+      "line": 30,
+      "level": "warning",
+      "cwes": [
+        "CWE-259",
+        "CWE-798"
+      ]
+    },
+    {
+      "rule_id": "javascript/HTTPSourceWithUncheckedType",
+      "uri": "routes/profileImageUrlUpload.ts",
+      "line": 28,
+      "level": "note",
+      "cwes": [
+        "CWE-1287"
+      ]
+    },
+    {
+      "rule_id": "javascript/HTTPSourceWithUncheckedType",
+      "uri": "routes/profileImageUrlUpload.ts",
+      "line": 28,
+      "level": "note",
+      "cwes": [
+        "CWE-1287"
+      ]
+    },
+    {
+      "rule_id": "javascript/NoHardcodedPasswords/test",
+      "uri": "frontend/src/app/Services/two-factor-auth-service.spec.ts",
+      "line": 65,
+      "level": "note",
+      "cwes": [
+        "CWE-259",
+        "CWE-798"
+      ]
+    },
+    {
+      "rule_id": "javascript/NoHardcodedPasswords/test",
+      "uri": "frontend/src/app/Services/two-factor-auth-service.spec.ts",
+      "line": 81,
+      "level": "note",
+      "cwes": [
+        "CWE-259",
+        "CWE-798"
+      ]
+    },
+    {
+      "rule_id": "javascript/NoHardcodedPasswords/test",
+      "uri": "frontend/src/app/oauth/oauth.component.spec.ts",
+      "line": 84,
+      "level": "note",
+      "cwes": [
+        "CWE-259",
+        "CWE-798"
+      ]
+    },
+    {
+      "rule_id": "javascript/NoHardcodedPasswords/test",
+      "uri": "frontend/src/app/oauth/oauth.component.spec.ts",
+      "line": 91,
+      "level": "note",
+      "cwes": [
+        "CWE-259",
+        "CWE-798"
+      ]
+    },
+    {
+      "rule_id": "javascript/NoHardcodedPasswords/test",
+      "uri": "frontend/src/app/oauth/oauth.component.spec.ts",
+      "line": 84,
+      "level": "note",
+      "cwes": [
+        "CWE-259",
+        "CWE-798"
+      ]
+    },
+    {
+      "rule_id": "javascript/NoRateLimitingForExpensiveWebOperation",
+      "uri": "routes/dataErasure.ts",
+      "line": 18,
+      "level": "warning",
+      "cwes": [
+        "CWE-770"
+      ]
+    },
+    {
+      "rule_id": "javascript/NoRateLimitingForExpensiveWebOperation",
+      "uri": "routes/dataErasure.ts",
+      "line": 54,
+      "level": "warning",
+      "cwes": [
+        "CWE-770"
+      ]
+    },
+    {
+      "rule_id": "javascript/NoRateLimitingForExpensiveWebOperation",
+      "uri": "routes/easterEgg.ts",
+      "line": 12,
+      "level": "warning",
+      "cwes": [
+        "CWE-770"
+      ]
+    },
+    {
+      "rule_id": "javascript/NoRateLimitingForExpensiveWebOperation",
+      "uri": "routes/premiumReward.ts",
+      "line": 12,
+      "level": "warning",
+      "cwes": [
+        "CWE-770"
+      ]
+    },
+    {
+      "rule_id": "javascript/NoRateLimitingForExpensiveWebOperation",
+      "uri": "routes/privacyPolicyProof.ts",
+      "line": 12,
+      "level": "warning",
+      "cwes": [
+        "CWE-770"
+      ]
+    },
+    {
+      "rule_id": "javascript/NoRateLimitingForExpensiveWebOperation",
+      "uri": "routes/profileImageUrlUpload.ts",
+      "line": 17,
+      "level": "warning",
+      "cwes": [
+        "CWE-770"
+      ]
+    },
+    {
+      "rule_id": "javascript/NoRateLimitingForExpensiveWebOperation",
+      "uri": "routes/videoHandler.ts",
+      "line": 52,
+      "level": "warning",
+      "cwes": [
+        "CWE-770"
+      ]
+    },
+    {
+      "rule_id": "javascript/NoSqli",
+      "uri": "routes/likeProductReviews.ts",
+      "line": 25,
+      "level": "error",
+      "cwes": [
+        "CWE-943"
+      ]
+    },
+    {
+      "rule_id": "javascript/NoSqli",
+      "uri": "routes/likeProductReviews.ts",
+      "line": 43,
+      "level": "error",
+      "cwes": [
+        "CWE-943"
+      ]
+    },
+    {
+      "rule_id": "javascript/NoSqli",
+      "uri": "routes/likeProductReviews.ts",
+      "line": 35,
+      "level": "error",
+      "cwes": [
+        "CWE-943"
+      ]
+    },
+    {
+      "rule_id": "javascript/NoSqli",
+      "uri": "routes/likeProductReviews.ts",
+      "line": 50,
+      "level": "error",
+      "cwes": [
+        "CWE-943"
+      ]
+    },
+    {
+      "rule_id": "javascript/PT",
+      "uri": "routes/keyServer.ts",
+      "line": 14,
+      "level": "error",
+      "cwes": [
+        "CWE-23"
+      ]
+    },
+    {
+      "rule_id": "javascript/PT",
+      "uri": "routes/quarantineServer.ts",
+      "line": 14,
+      "level": "error",
+      "cwes": [
+        "CWE-23"
+      ]
+    },
+    {
+      "rule_id": "javascript/PT",
+      "uri": "routes/profileImageUrlUpload.ts",
+      "line": 29,
+      "level": "error",
+      "cwes": [
+        "CWE-23"
+      ]
+    },
+    {
+      "rule_id": "javascript/PrototypePollution",
+      "uri": "routes/vulnCodeFixes.ts",
+      "line": 92,
+      "level": "warning",
+      "cwes": [
+        "CWE-1321"
+      ]
+    },
+    {
+      "rule_id": "javascript/PrototypePollution",
+      "uri": "routes/vulnCodeSnippet.ts",
+      "line": 110,
+      "level": "warning",
+      "cwes": [
+        "CWE-1321"
+      ]
+    },
+    {
+      "rule_id": "javascript/HTTPSourceWithUncheckedType",
+      "uri": "routes/vulnCodeSnippet.ts",
+      "line": 63,
+      "level": "note",
+      "cwes": [
+        "CWE-1287"
+      ]
+    },
+    {
+      "rule_id": "javascript/HTTPSourceWithUncheckedType",
+      "uri": "server.ts",
+      "line": 409,
+      "level": "note",
+      "cwes": [
+        "CWE-1287"
+      ]
+    },
+    {
+      "rule_id": "javascript/HTTPSourceWithUncheckedType",
+      "uri": "server.ts",
+      "line": 409,
+      "level": "note",
+      "cwes": [
+        "CWE-1287"
+      ]
+    },
+    {
+      "rule_id": "javascript/Sqli",
+      "uri": "data/static/codefixes/dbSchemaChallenge_1.ts",
+      "line": 5,
+      "level": "error",
+      "cwes": [
+        "CWE-89"
+      ]
+    },
+    {
+      "rule_id": "javascript/Sqli",
+      "uri": "data/static/codefixes/unionSqlInjectionChallenge_1.ts",
+      "line": 6,
+      "level": "error",
+      "cwes": [
+        "CWE-89"
+      ]
+    },
+    {
+      "rule_id": "javascript/Sqli",
+      "uri": "data/static/codefixes/unionSqlInjectionChallenge_3.ts",
+      "line": 10,
+      "level": "error",
+      "cwes": [
+        "CWE-89"
+      ]
+    },
+    {
+      "rule_id": "javascript/XSS",
+      "uri": "routes/recycles.ts",
+      "line": 17,
+      "level": "error",
+      "cwes": [
+        "CWE-79"
+      ]
+    },
+    {
+      "rule_id": "javascript/HTTPSourceWithUncheckedType",
+      "uri": "routes/vulnCodeSnippet.ts",
+      "line": 64,
+      "level": "note",
+      "cwes": [
+        "CWE-1287"
+      ]
+    },
+    {
+      "rule_id": "javascript/HTTPSourceWithUncheckedType",
+      "uri": "routes/vulnCodeSnippet.ts",
+      "line": 66,
+      "level": "note",
+      "cwes": [
+        "CWE-1287"
+      ]
+    },
+    {
+      "rule_id": "javascript/HTTPSourceWithUncheckedType",
+      "uri": "server.ts",
+      "line": 410,
+      "level": "note",
+      "cwes": [
+        "CWE-1287"
+      ]
+    },
+    {
+      "rule_id": "javascript/HTTPSourceWithUncheckedType",
+      "uri": "server.ts",
+      "line": 411,
+      "level": "note",
+      "cwes": [
+        "CWE-1287"
+      ]
+    },
+    {
+      "rule_id": "javascript/HTTPSourceWithUncheckedType",
+      "uri": "server.ts",
+      "line": 412,
+      "level": "note",
+      "cwes": [
+        "CWE-1287"
+      ]
+    }
+  ],
+  "false_negatives": [
+    {
+      "challenge_key": "passwordHashLeakChallenge",
+      "challenge_name": "Password Hash Leak",
+      "category": "Sensitive Data Exposure",
+      "cwe": 200,
+      "vulnerable_files": [
+        "routes/currentUser.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "fileWriteChallenge",
+      "challenge_name": "Arbitrary File Write",
+      "category": "Vulnerable Components",
+      "cwe": 22,
+      "vulnerable_files": [
+        "routes/fileUpload.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "rceChallenge",
+      "challenge_name": "Blocked RCE DoS",
+      "category": "Insecure Deserialization",
+      "cwe": 94,
+      "vulnerable_files": [
+        "routes/b2bOrder.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "changePasswordBenderChallenge",
+      "challenge_name": "Change Bender's Password",
+      "category": "Broken Authentication",
+      "cwe": 620,
+      "vulnerable_files": [
+        "routes/changePassword.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "persistedXssUserChallenge",
+      "challenge_name": "Client-side XSS Protection",
+      "category": "XSS",
+      "cwe": 79,
+      "vulnerable_files": [
+        "models/user.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "emailLeakChallenge",
+      "challenge_name": "Email Leak",
+      "category": "Sensitive Data Exposure",
+      "cwe": 200,
+      "vulnerable_files": [
+        "routes/currentUser.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "forgedCouponChallenge",
+      "challenge_name": "Forged Coupon",
+      "category": "Cryptographic Issues",
+      "cwe": 347,
+      "vulnerable_files": [
+        "lib/insecurity.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "forgedReviewChallenge",
+      "challenge_name": "Forged Review",
+      "category": "Broken Access Control",
+      "cwe": 284,
+      "vulnerable_files": [
+        "routes/updateProductReviews.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "jwtForgedChallenge",
+      "challenge_name": "Forged Signed JWT",
+      "category": "Vulnerable Components",
+      "cwe": 347,
+      "vulnerable_files": [
+        "lib/insecurity.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "loginSupportChallenge",
+      "challenge_name": "Login Support Team",
+      "category": "Security Misconfiguration",
+      "cwe": 798,
+      "vulnerable_files": [
+        "routes/login.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "noSqlCommandChallenge",
+      "challenge_name": "NoSQL DoS",
+      "category": "Injection",
+      "cwe": 943,
+      "vulnerable_files": [
+        "routes/showProductReviews.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "noSqlOrdersChallenge",
+      "challenge_name": "NoSQL Exfiltration",
+      "category": "Injection",
+      "cwe": 943,
+      "vulnerable_files": [
+        "routes/trackOrder.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "sstiChallenge",
+      "challenge_name": "SSTi",
+      "category": "Injection",
+      "cwe": 94,
+      "vulnerable_files": [
+        "routes/userProfile.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "persistedXssFeedbackChallenge",
+      "challenge_name": "Server-side XSS Protection",
+      "category": "XSS",
+      "cwe": 79,
+      "vulnerable_files": [
+        "models/feedback.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "rceOccupyChallenge",
+      "challenge_name": "Successful RCE DoS",
+      "category": "Insecure Deserialization",
+      "cwe": 94,
+      "vulnerable_files": [
+        "routes/b2bOrder.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "jwtUnsignedChallenge",
+      "challenge_name": "Unsigned JWT",
+      "category": "Vulnerable Components",
+      "cwe": 347,
+      "vulnerable_files": [
+        "lib/insecurity.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "uploadSizeChallenge",
+      "challenge_name": "Upload Size",
+      "category": "Improper Input Validation",
+      "cwe": 434,
+      "vulnerable_files": [
+        "routes/fileUpload.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "uploadTypeChallenge",
+      "challenge_name": "Upload Type",
+      "category": "Improper Input Validation",
+      "cwe": 434,
+      "vulnerable_files": [
+        "routes/fileUpload.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "videoXssChallenge",
+      "challenge_name": "Video XSS",
+      "category": "XSS",
+      "cwe": 79,
+      "vulnerable_files": [
+        "routes/videoHandler.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "basketAccessChallenge",
+      "challenge_name": "View Basket",
+      "category": "Broken Access Control",
+      "cwe": 639,
+      "vulnerable_files": [
+        "routes/basket.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "xxeFileDisclosureChallenge",
+      "challenge_name": "XXE Data Access",
+      "category": "XXE",
+      "cwe": 611,
+      "vulnerable_files": [
+        "routes/fileUpload.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "xxeDosChallenge",
+      "challenge_name": "XXE DoS",
+      "category": "XXE",
+      "cwe": 776,
+      "vulnerable_files": [
+        "routes/fileUpload.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "yamlBombChallenge",
+      "challenge_name": "Memory Bomb",
+      "category": "Insecure Deserialization",
+      "cwe": 400,
+      "vulnerable_files": [
+        "routes/fileUpload.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "lfrChallenge",
+      "challenge_name": "Local File Read",
+      "category": "Vulnerable Components",
+      "cwe": 22,
+      "vulnerable_files": [
+        "routes/dataErasure.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "exposedCredentialsChallenge",
+      "challenge_name": "Exposed credentials",
+      "category": "Sensitive Data Exposure",
+      "cwe": 798,
+      "vulnerable_files": [
+        "routes/login.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "leakedApiKeyChallenge",
+      "challenge_name": "Leaked API Key",
+      "category": "Sensitive Data Exposure",
+      "cwe": 798,
+      "vulnerable_files": [],
+      "confidence": "low"
+    }
+  ],
+  "informational_findings": [
+    {
+      "rule_id": "javascript/HardcodedSecret",
+      "uri": "lib/insecurity.ts",
+      "line": 22,
+      "cwes": [
+        "CWE-547"
+      ]
+    },
+    {
+      "rule_id": "javascript/HardcodedSecret",
+      "uri": "lib/insecurity.ts",
+      "line": 23,
+      "cwes": [
+        "CWE-547"
+      ]
+    },
+    {
+      "rule_id": "javascript/HardcodedSecret",
+      "uri": "lib/insecurity.ts",
+      "line": 44,
+      "cwes": [
+        "CWE-547"
+      ]
+    },
+    {
+      "rule_id": "javascript/HardcodedNonCryptoSecret",
+      "uri": "lib/insecurity.ts",
+      "line": 23,
+      "cwes": [
+        "CWE-547"
+      ]
+    },
+    {
+      "rule_id": "javascript/HardcodedNonCryptoSecret",
+      "uri": "lib/insecurity.ts",
+      "line": 54,
+      "cwes": [
+        "CWE-547"
+      ]
+    },
+    {
+      "rule_id": "javascript/HardcodedNonCryptoSecret/test",
+      "uri": "frontend/src/app/app.guard.spec.ts",
+      "line": 38,
+      "cwes": [
+        "CWE-547"
+      ]
+    },
+    {
+      "rule_id": "javascript/HardcodedNonCryptoSecret/test",
+      "uri": "frontend/src/app/last-login-ip/last-login-ip.component.spec.ts",
+      "line": 61,
+      "cwes": [
+        "CWE-547"
+      ]
+    }
+  ],
+  "excluded_findings_count": 193,
+  "excluded_patterns": [
+    "test/",
+    "cypress/"
+  ]
+}
