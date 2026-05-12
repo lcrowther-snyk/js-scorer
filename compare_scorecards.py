@@ -184,17 +184,20 @@ def render(tools: list[tuple[str, dict]], out_path: str) -> None:
 
     # ── summary table rows ──────────────────────────────────────────────────
     # Only post-filter (in-scope) numbers — the report honours whatever
-    # filtering produced each scorecard JSON.
+    # filtering produced each scorecard JSON. TP/FP are finding-level so
+    # TP + FP = Findings. "Challenges covered" reports ground-truth coverage
+    # separately (one finding can cover multiple overlapping challenges).
     METRIC_ROWS = [
-        ("Findings",        lambda d: d["totals"]["in_scope"],               0, False, True),
-        ("True positives",  lambda d: d["metrics"]["TP"],                    0, False, True),
-        ("False positives", lambda d: d["metrics"]["FP"],                    0, False, False),
-        ("False negatives", lambda d: d["metrics"]["FN"],                    0, False, False),
-        ("Precision",       lambda d: d["metrics"]["precision"],             3, False, True),
-        ("Recall",          lambda d: d["metrics"]["recall"],                3, False, True),
-        ("F1",              lambda d: d["metrics"]["f1"],                    3, False, True),
-        ("Youden J",        lambda d: d["metrics"]["youden_j"],              3, True,  True),
-        ("Specificity",     lambda d: d["metrics"]["specificity"],           3, False, True),
+        ("Findings",            lambda d: d["totals"]["in_scope"],                0, False, True),
+        ("True positives",      lambda d: d["metrics"]["TP"],                     0, False, True),
+        ("False positives",     lambda d: d["metrics"]["FP"],                     0, False, False),
+        ("Challenges covered",  lambda d: d["metrics"].get("challenges_detected"), 0, False, True),
+        ("Challenges missed",   lambda d: d["metrics"]["FN"],                     0, False, False),
+        ("Precision",           lambda d: d["metrics"]["precision"],              3, False, True),
+        ("Recall",              lambda d: d["metrics"]["recall"],                 3, False, True),
+        ("F1",                  lambda d: d["metrics"]["f1"],                     3, False, True),
+        ("Youden J",            lambda d: d["metrics"]["youden_j"],               3, True,  True),
+        ("Specificity",         lambda d: d["metrics"]["specificity"],            3, False, True),
     ]
 
     head_cells = "".join(f"<th>{esc(label)}</th>" for label, _ in tools)
@@ -205,7 +208,7 @@ def render(tools: list[tuple[str, dict]], out_path: str) -> None:
             try: vals.append(fn(d))
             except Exception: vals.append(None)
         HIGHLIGHT = {"Precision", "Recall", "F1", "Youden J", "Specificity",
-                     "True positives"}
+                     "True positives", "Challenges covered"}
         lead = best_idx(vals, allow_neg, higher_better) if name in HIGHLIGHT else None
         cells = []
         for i, v in enumerate(vals):

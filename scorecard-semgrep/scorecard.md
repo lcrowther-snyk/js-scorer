@@ -13,13 +13,13 @@
 | Informational (CWE filter) | 0 |
 | In-scope findings | 23 |
 | SAST-detectable challenges | 51 |
-| TP | 9 |
+| TP | 3 |
 | FP | 20 |
 | FN | 42 |
 | TN | 42 |
-| Precision | 0.3103 |
+| Precision | 0.1304 |
 | Recall | 0.1765 |
-| F1 | 0.2250 |
+| F1 | 0.1500 |
 | Youden's J | -0.1461 |
 
 > **TN formula:** For each FN challenge, each (vulnerable_file, CWE) pair where no finding was emitted counts as one TN (per OWASP Benchmark convention).
@@ -37,7 +37,7 @@
 | CWE-400 | 0 | 0 | 1 | n/a | 0.0000 | n/a |
 | CWE-434 | 0 | 0 | 2 | n/a | 0.0000 | n/a |
 | CWE-548 | 0 | 4 | 0 | 0.0000 | n/a | n/a |
-| CWE-601 | 2 | 0 | 0 | 1.0000 | 1.0000 | 1.0000 |
+| CWE-601 | 1 | 0 | 0 | 1.0000 | 1.0000 | 1.0000 |
 | CWE-611 | 0 | 0 | 1 | n/a | 0.0000 | n/a |
 | CWE-620 | 0 | 0 | 1 | n/a | 0.0000 | n/a |
 | CWE-639 | 0 | 0 | 1 | n/a | 0.0000 | n/a |
@@ -46,7 +46,7 @@
 | CWE-78 | 0 | 5 | 0 | 0.0000 | n/a | n/a |
 | CWE-79 | 0 | 1 | 9 | 0.0000 | 0.0000 | n/a |
 | CWE-798 | 0 | 1 | 3 | 0.0000 | 0.0000 | n/a |
-| CWE-89 | 7 | 4 | 0 | 0.6364 | 1.0000 | 0.7778 |
+| CWE-89 | 2 | 4 | 0 | 0.3333 | 1.0000 | 0.5000 |
 | CWE-916 | 0 | 0 | 1 | n/a | 0.0000 | n/a |
 | CWE-918 | 0 | 0 | 1 | n/a | 0.0000 | n/a |
 | CWE-94 | 0 | 0 | 3 | n/a | 0.0000 | n/a |

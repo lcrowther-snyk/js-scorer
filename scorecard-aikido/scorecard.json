@@ -13,21 +13,26 @@
   },
   "min_severity": "medium",
   "metrics": {
-    "TP": 9,
+    "TP": 3,
     "FP": 20,
     "FN": 42,
     "TN": 42,
-    "precision": 0.3103448275862069,
+    "challenges_detected": 9,
+    "challenges_total": 51,
+    "precision": 0.13043478260869565,
     "recall": 0.17647058823529413,
-    "f1": 0.22500000000000003,
+    "f1": 0.15,
     "youden_j": -0.1461100569259962,
     "specificity": 0.6774193548387096,
+    "TP_formula": "TP = unique findings (file+line+rule) that match \u22651 ground-truth challenge. A single finding covering multiple overlapping challenges still counts as 1 TP.",
+    "recall_formula": "recall = challenges_detected / challenges_total \u2014 coverage of the ground-truth challenge set.",
     "TN_formula": "For each FN challenge, each (vulnerable_file, CWE) pair where no finding was emitted counts as one TN (per OWASP Benchmark convention)."
   },
   "per_cwe": [
     {
       "cwe": "CWE-200",
       "TP": 0,
+      "challenges_detected": 0,
       "FP": 0,
       "FN": 2,
       "precision": null,
@@ -37,6 +42,7 @@
     {
       "cwe": "CWE-22",
       "TP": 0,
+      "challenges_detected": 0,
       "FP": 0,
       "FN": 2,
       "precision": null,
@@ -46,6 +52,7 @@
     {
       "cwe": "CWE-23",
       "TP": 0,
+      "challenges_detected": 0,
       "FP": 0,
       "FN": 6,
       "precision": null,
@@ -55,6 +62,7 @@
     {
       "cwe": "CWE-284",
       "TP": 0,
+      "challenges_detected": 0,
       "FP": 0,
       "FN": 1,
       "precision": null,
@@ -64,6 +72,7 @@
     {
       "cwe": "CWE-347",
       "TP": 0,
+      "challenges_detected": 0,
       "FP": 0,
       "FN": 3,
       "precision": null,
@@ -73,6 +82,7 @@
     {
       "cwe": "CWE-352",
       "TP": 0,
+      "challenges_detected": 0,
       "FP": 0,
       "FN": 1,
       "precision": null,
@@ -82,6 +92,7 @@
     {
       "cwe": "CWE-400",
       "TP": 0,
+      "challenges_detected": 0,
       "FP": 0,
       "FN": 1,
       "precision": null,
@@ -91,6 +102,7 @@
     {
       "cwe": "CWE-434",
       "TP": 0,
+      "challenges_detected": 0,
       "FP": 0,
       "FN": 2,
       "precision": null,
@@ -100,6 +112,7 @@
     {
       "cwe": "CWE-548",
       "TP": 0,
+      "challenges_detected": 0,
       "FP": 4,
       "FN": 0,
       "precision": 0.0,
@@ -108,7 +121,8 @@
     },
     {
       "cwe": "CWE-601",
-      "TP": 2,
+      "TP": 1,
+      "challenges_detected": 2,
       "FP": 0,
       "FN": 0,
       "precision": 1.0,
@@ -118,6 +132,7 @@
     {
       "cwe": "CWE-611",
       "TP": 0,
+      "challenges_detected": 0,
       "FP": 0,
       "FN": 1,
       "precision": null,
@@ -127,6 +142,7 @@
     {
       "cwe": "CWE-620",
       "TP": 0,
+      "challenges_detected": 0,
       "FP": 0,
       "FN": 1,
       "precision": null,
@@ -136,6 +152,7 @@
     {
       "cwe": "CWE-639",
       "TP": 0,
+      "challenges_detected": 0,
       "FP": 0,
       "FN": 1,
       "precision": null,
@@ -145,6 +162,7 @@
     {
       "cwe": "CWE-73",
       "TP": 0,
+      "challenges_detected": 0,
       "FP": 4,
       "FN": 0,
       "precision": 0.0,
@@ -154,6 +172,7 @@
     {
       "cwe": "CWE-776",
       "TP": 0,
+      "challenges_detected": 0,
       "FP": 0,
       "FN": 1,
       "precision": null,
@@ -163,6 +182,7 @@
     {
       "cwe": "CWE-78",
       "TP": 0,
+      "challenges_detected": 0,
       "FP": 5,
       "FN": 0,
       "precision": 0.0,
@@ -172,6 +192,7 @@
     {
       "cwe": "CWE-79",
       "TP": 0,
+      "challenges_detected": 0,
       "FP": 1,
       "FN": 9,
       "precision": 0.0,
@@ -181,6 +202,7 @@
     {
       "cwe": "CWE-798",
       "TP": 0,
+      "challenges_detected": 0,
       "FP": 1,
       "FN": 3,
       "precision": 0.0,
@@ -189,16 +211,18 @@
     },
     {
       "cwe": "CWE-89",
-      "TP": 7,
+      "TP": 2,
+      "challenges_detected": 7,
       "FP": 4,
       "FN": 0,
-      "precision": 0.6363636363636364,
+      "precision": 0.3333333333333333,
       "recall": 1.0,
-      "f1": 0.7777777777777778
+      "f1": 0.5
     },
     {
       "cwe": "CWE-916",
       "TP": 0,
+      "challenges_detected": 0,
       "FP": 0,
       "FN": 1,
       "precision": null,
@@ -208,6 +232,7 @@
     {
       "cwe": "CWE-918",
       "TP": 0,
+      "challenges_detected": 0,
       "FP": 0,
       "FN": 1,
       "precision": null,
@@ -217,6 +242,7 @@
     {
       "cwe": "CWE-94",
       "TP": 0,
+      "challenges_detected": 0,
       "FP": 0,
       "FN": 3,
       "precision": null,
@@ -226,6 +252,7 @@
     {
       "cwe": "CWE-943",
       "TP": 0,
+      "challenges_detected": 0,
       "FP": 0,
       "FN": 3,
       "precision": null,
@@ -235,6 +262,7 @@
     {
       "cwe": "CWE-95",
       "TP": 0,
+      "challenges_detected": 0,
       "FP": 1,
       "FN": 0,
       "precision": 0.0,
@@ -739,8 +767,8 @@
       "category": "XSS",
       "cwe": 79,
       "vulnerable_files": [
-        "routes/saveLoginIp.ts",
-        "frontend/src/app/last-login-ip/last-login-ip.component.ts"
+        "frontend/src/app/last-login-ip/last-login-ip.component.ts",
+        "routes/saveLoginIp.ts"
       ],
       "confidence": "high"
     },

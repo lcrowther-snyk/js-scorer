@@ -710,13 +710,17 @@ def score(
     log.info("SAST-detectable challenges in ground truth: %d", len(detectable))
 
     # ── Step 4: match findings to challenges ─────────────────────────────────
-    # A finding f is a TP for challenge c when:
+    # A finding f matches challenge c when:
     #   f["uri"] ∈ c["_vuln_files"]  AND  f["cwes"] ∩ c["_cwes"] ≠ ∅
     #
-    # Each challenge contributes at most 1 TP to recall (but all matching
-    # findings are recorded in the cluster for auditing).
+    # TP is finding-based: each unique finding that hits ≥1 challenge counts
+    # once, even when that single finding covers several overlapping Juice
+    # Shop challenges (e.g. one fileServer.ts:33 path-traversal finding spans
+    # 5 challenges). The per-challenge cluster is still recorded so we can
+    # report `challenges_detected` separately for ground-truth coverage.
 
     tp_challenges: dict[str, list[dict]] = defaultdict(list)  # challenge key -> [findings]
+    tp_finding_ids: set[int] = set()
     fp_findings: list[dict] = []
 
     for f in scored_findings:
@@ -725,15 +729,20 @@ def score(
             if f["uri"] in c["_vuln_files"] and (f["cwes"] & c["_cwes"]):
                 tp_challenges[c["key"]].append(f)
                 matched_any = True
-        if not matched_any:
+        if matched_any:
+            tp_finding_ids.add(id(f))
+        else:
             fp_findings.append(f)
 
     # ── Step 5: identify FNs ────────────────────────────────────────────────
     fn_challenges = [c for c in detectable if c["key"] not in tp_challenges]
 
-    TP = len(tp_challenges)
+    # Finding-level for precision; challenge-level for recall (OWASP convention).
+    TP = len(tp_finding_ids)
     FP = len(fp_findings)
     FN = len(fn_challenges)
+    challenges_detected = len(tp_challenges)
+    total_detectable = len(detectable)
 
     # For TN (OWASP Benchmark convention):
     # A TN for a (file, CWE) pair = a detectable challenge whose (file,CWE)
@@ -754,8 +763,12 @@ def score(
                     TN += 1
 
     # ── Step 6: metrics ──────────────────────────────────────────────────────
+    # Precision is finding-based: of the findings emitted, how many were real?
     precision = TP / (TP + FP) if (TP + FP) > 0 else None
-    recall    = TP / (TP + FN) if (TP + FN) > 0 else None
+    # Recall is coverage-based: of the ground-truth challenges, how many had
+    # at least one matching finding?
+    recall = (challenges_detected / total_detectable
+              if total_detectable > 0 else None)
     f1 = (2 * precision * recall / (precision + recall)
           if (precision is not None and recall is not None
               and (precision + recall) > 0) else None)
@@ -764,18 +777,20 @@ def score(
                 if (recall is not None and specificity is not None) else None)
 
     # ── Per-CWE metrics ──────────────────────────────────────────────────────
-    # Group by the CWE that caused the match (or primary CWE for FN/FP)
-    cwe_tp: dict[str, set[str]] = defaultdict(set)   # cwe -> {challenge_keys}
+    # Per-CWE uses the same convention: TP = unique findings whose match CWE
+    # was this CWE; recall denominator = challenges with this CWE that had ≥1
+    # matching finding vs. those that didn't.
+    cwe_tp_findings: dict[str, set[int]] = defaultdict(set)  # cwe -> {id(finding)}
+    cwe_challenges_detected: dict[str, set[str]] = defaultdict(set)  # cwe -> {challenge_keys}
     cwe_fp: dict[str, list] = defaultdict(list)
     cwe_fn: dict[str, list] = defaultdict(list)
 
     for ck, flist in tp_challenges.items():
         c = next(x for x in detectable if x["key"] == ck)
-        match_cwes = set()
         for f in flist:
-            match_cwes |= f["cwes"] & c["_cwes"]
-        for cwe in match_cwes:
-            cwe_tp[cwe].add(ck)
+            for cwe in (f["cwes"] & c["_cwes"]):
+                cwe_tp_findings[cwe].add(id(f))
+                cwe_challenges_detected[cwe].add(ck)
 
     for f in fp_findings:
         for cwe in f["cwes"]:
@@ -785,17 +800,19 @@ def score(
         for cwe in c["_cwes"]:
             cwe_fn[cwe].append(c)
 
-    all_cwes = sorted(set(list(cwe_tp) + list(cwe_fp) + list(cwe_fn)))
+    all_cwes = sorted(set(list(cwe_tp_findings) + list(cwe_fp) + list(cwe_fn)))
 
     per_cwe: list[dict] = []
     for cwe in all_cwes:
-        ct = len(cwe_tp.get(cwe, set()))
+        ct = len(cwe_tp_findings.get(cwe, set()))         # TP findings for this CWE
+        chd = len(cwe_challenges_detected.get(cwe, set()))  # challenges with this CWE detected
         cf = len(cwe_fp.get(cwe, []))
         cn = len(cwe_fn.get(cwe, []))
         p = ct / (ct + cf) if (ct + cf) > 0 else None
-        r = ct / (ct + cn) if (ct + cn) > 0 else None
+        r = chd / (chd + cn) if (chd + cn) > 0 else None
         f1c = (2 * p * r / (p + r) if (p is not None and r is not None and (p + r) > 0) else None)
-        per_cwe.append({"cwe": cwe, "TP": ct, "FP": cf, "FN": cn,
+        per_cwe.append({"cwe": cwe, "TP": ct, "challenges_detected": chd,
+                         "FP": cf, "FN": cn,
                          "precision": p, "recall": r, "f1": f1c})
 
     # ── Assemble result dict ─────────────────────────────────────────────────
@@ -815,11 +832,22 @@ def score(
         "min_severity": min_severity,
         "metrics": {
             "TP": TP, "FP": FP, "FN": FN, "TN": TN,
+            "challenges_detected": challenges_detected,
+            "challenges_total": total_detectable,
             "precision": precision,
             "recall": recall,
             "f1": f1,
             "youden_j": youden_j,
             "specificity": specificity,
+            "TP_formula": (
+                "TP = unique findings (file+line+rule) that match ≥1 "
+                "ground-truth challenge. A single finding covering multiple "
+                "overlapping challenges still counts as 1 TP."
+            ),
+            "recall_formula": (
+                "recall = challenges_detected / challenges_total — coverage "
+                "of the ground-truth challenge set."
+            ),
             "TN_formula": (
                 "For each FN challenge, each (vulnerable_file, CWE) pair "
                 "where no finding was emitted counts as one TN "

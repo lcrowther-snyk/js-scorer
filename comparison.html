@@ -75,7 +75,7 @@ h2 { font-size: 15px; font-weight: 600; color: #111; margin: 32px 0 14px;
 <div class="page">
   <div>
     <div class="hdr-title">SAST Tool Comparison</div>
-    <div class="hdr-meta">Generated 2026-05-12 01:08 UTC · ground truth: juice-shop-ground-truth.yml ·
+    <div class="hdr-meta">Generated 2026-05-12 02:09 UTC · ground truth: juice-shop-ground-truth.yml ·
       severity floor: <b>≥ medium</b> ·
       51 SAST-detectable challenges · 24 caught by at least one tool</div>
     <div class="tool-chips"><span class="chip"><b>Snyk</b> · SnykCode v1.1300.2 · results-snyk.sarif</span><span class="chip"><b>Semgrep</b> · Semgrep OSS v1.161.0 · results-semgrep.sarif</span><span class="chip"><b>Aikido</b> · Opengrep OSS v1.20.0 · results-aikido.sarif</span></div>
@@ -85,7 +85,7 @@ h2 { font-size: 15px; font-weight: 600; color: #111; margin: 32px 0 14px;
   <div class="card summary">
     <table>
       <thead><tr><th>Metric</th><th>Snyk</th><th>Semgrep</th><th>Aikido</th></tr></thead>
-      <tbody><tr><td>Findings</td><td class="">34</td><td class="">23</td><td class="">23</td></tr><tr><td>True positives</td><td class="lead">24</td><td class="">9</td><td class="">9</td></tr><tr><td>False positives</td><td class="">22</td><td class="">20</td><td class="">20</td></tr><tr><td>False negatives</td><td class="">27</td><td class="">42</td><td class="">42</td></tr><tr><td>Precision</td><td class="lead">0.522</td><td class="">0.310</td><td class="">0.310</td></tr><tr><td>Recall</td><td class="lead">0.471</td><td class="">0.176</td><td class="">0.176</td></tr><tr><td>F1</td><td class="lead">0.495</td><td class="">0.225</td><td class="">0.225</td></tr><tr><td>Youden J</td><td class="lead">0.012</td><td class="">-0.146</td><td class="">-0.146</td></tr><tr><td>Specificity</td><td class="">0.542</td><td class="">0.677</td><td class="">0.677</td></tr></tbody>
+      <tbody><tr><td>Findings</td><td class="">34</td><td class="">23</td><td class="">23</td></tr><tr><td>True positives</td><td class="lead">12</td><td class="">3</td><td class="">3</td></tr><tr><td>False positives</td><td class="">22</td><td class="">20</td><td class="">20</td></tr><tr><td>Challenges covered</td><td class="lead">24</td><td class="">9</td><td class="">9</td></tr><tr><td>Challenges missed</td><td class="">27</td><td class="">42</td><td class="">42</td></tr><tr><td>Precision</td><td class="lead">0.353</td><td class="">0.130</td><td class="">0.130</td></tr><tr><td>Recall</td><td class="lead">0.471</td><td class="">0.176</td><td class="">0.176</td></tr><tr><td>F1</td><td class="lead">0.403</td><td class="">0.150</td><td class="">0.150</td></tr><tr><td>Youden J</td><td class="lead">0.012</td><td class="">-0.146</td><td class="">-0.146</td></tr><tr><td>Specificity</td><td class="">0.542</td><td class="">0.677</td><td class="">0.677</td></tr></tbody>
     </table>
     <div class="legend">Highlighted cell = clear winner for that metric (ties not highlighted).
       Tone colours apply to per-tool cards below: green ≥ 0.7, amber ≥ 0.5, red &lt; 0.5
@@ -98,11 +98,11 @@ h2 { font-size: 15px; font-weight: 600; color: #111; margin: 32px 0 14px;
           <div class="tname">Snyk</div>
           <div class="tdriver">SnykCode v1.1300.2</div>
           <div class="stats">
-            <div class="stat"><div class="v">24</div><div class="l">True positives</div></div>
+            <div class="stat"><div class="v">12</div><div class="l">True positives</div></div>
             <div class="stat"><div class="v">22</div><div class="l">False positives</div></div>
-            <div class="stat"><div class="v tone-warning">0.522</div><div class="l">Precision</div></div>
+            <div class="stat"><div class="v tone-danger">0.353</div><div class="l">Precision</div></div>
             <div class="stat"><div class="v tone-danger">0.471</div><div class="l">Recall</div></div>
-            <div class="stat"><div class="v tone-danger">0.495</div><div class="l">F1</div></div>
+            <div class="stat"><div class="v tone-danger">0.403</div><div class="l">F1</div></div>
             <div class="stat"><div class="v tone-warning">0.012</div><div class="l">Youden J</div></div>
           </div>
         </div>
@@ -110,11 +110,11 @@ h2 { font-size: 15px; font-weight: 600; color: #111; margin: 32px 0 14px;
           <div class="tname">Semgrep</div>
           <div class="tdriver">Semgrep OSS v1.161.0</div>
           <div class="stats">
-            <div class="stat"><div class="v">9</div><div class="l">True positives</div></div>
+            <div class="stat"><div class="v">3</div><div class="l">True positives</div></div>
             <div class="stat"><div class="v">20</div><div class="l">False positives</div></div>
-            <div class="stat"><div class="v tone-danger">0.310</div><div class="l">Precision</div></div>
+            <div class="stat"><div class="v tone-danger">0.130</div><div class="l">Precision</div></div>
             <div class="stat"><div class="v tone-danger">0.176</div><div class="l">Recall</div></div>
-            <div class="stat"><div class="v tone-danger">0.225</div><div class="l">F1</div></div>
+            <div class="stat"><div class="v tone-danger">0.150</div><div class="l">F1</div></div>
             <div class="stat"><div class="v tone-danger">-0.146</div><div class="l">Youden J</div></div>
           </div>
         </div>
@@ -122,11 +122,11 @@ h2 { font-size: 15px; font-weight: 600; color: #111; margin: 32px 0 14px;
           <div class="tname">Aikido</div>
           <div class="tdriver">Opengrep OSS v1.20.0</div>
           <div class="stats">
-            <div class="stat"><div class="v">9</div><div class="l">True positives</div></div>
+            <div class="stat"><div class="v">3</div><div class="l">True positives</div></div>
             <div class="stat"><div class="v">20</div><div class="l">False positives</div></div>
-            <div class="stat"><div class="v tone-danger">0.310</div><div class="l">Precision</div></div>
+            <div class="stat"><div class="v tone-danger">0.130</div><div class="l">Precision</div></div>
             <div class="stat"><div class="v tone-danger">0.176</div><div class="l">Recall</div></div>
-            <div class="stat"><div class="v tone-danger">0.225</div><div class="l">F1</div></div>
+            <div class="stat"><div class="v tone-danger">0.150</div><div class="l">F1</div></div>
             <div class="stat"><div class="v tone-danger">-0.146</div><div class="l">Youden J</div></div>
           </div>
         </div></div>
