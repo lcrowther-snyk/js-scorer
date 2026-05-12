@@ -1,0 +1,1005 @@
+{
+  "tool": "Semgrep OSS",
+  "tool_version": "1.161.0",
+  "sarif": "results-semgrep.sarif",
+  "ground_truth": "juice-shop-ground-truth.yml",
+  "totals": {
+    "total_findings": 23,
+    "excluded": 0,
+    "severity_filtered": 0,
+    "informational": 0,
+    "in_scope": 23,
+    "sast_detectable_challenges": 51
+  },
+  "min_severity": "medium",
+  "metrics": {
+    "TP": 9,
+    "FP": 20,
+    "FN": 42,
+    "TN": 42,
+    "precision": 0.3103448275862069,
+    "recall": 0.17647058823529413,
+    "f1": 0.22500000000000003,
+    "youden_j": -0.1461100569259962,
+    "specificity": 0.6774193548387096,
+    "TN_formula": "For each FN challenge, each (vulnerable_file, CWE) pair where no finding was emitted counts as one TN (per OWASP Benchmark convention)."
+  },
+  "per_cwe": [
+    {
+      "cwe": "CWE-200",
+      "TP": 0,
+      "FP": 0,
+      "FN": 2,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-22",
+      "TP": 0,
+      "FP": 0,
+      "FN": 2,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-23",
+      "TP": 0,
+      "FP": 0,
+      "FN": 6,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-284",
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-347",
+      "TP": 0,
+      "FP": 0,
+      "FN": 3,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-352",
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-400",
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-434",
+      "TP": 0,
+      "FP": 0,
+      "FN": 2,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-548",
+      "TP": 0,
+      "FP": 4,
+      "FN": 0,
+      "precision": 0.0,
+      "recall": null,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-601",
+      "TP": 2,
+      "FP": 0,
+      "FN": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    {
+      "cwe": "CWE-611",
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-620",
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-639",
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-73",
+      "TP": 0,
+      "FP": 4,
+      "FN": 0,
+      "precision": 0.0,
+      "recall": null,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-776",
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-78",
+      "TP": 0,
+      "FP": 5,
+      "FN": 0,
+      "precision": 0.0,
+      "recall": null,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-79",
+      "TP": 0,
+      "FP": 1,
+      "FN": 9,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-798",
+      "TP": 0,
+      "FP": 1,
+      "FN": 3,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-89",
+      "TP": 7,
+      "FP": 4,
+      "FN": 0,
+      "precision": 0.6363636363636364,
+      "recall": 1.0,
+      "f1": 0.7777777777777778
+    },
+    {
+      "cwe": "CWE-916",
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-918",
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-94",
+      "TP": 0,
+      "FP": 0,
+      "FN": 3,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-943",
+      "TP": 0,
+      "FP": 0,
+      "FN": 3,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    {
+      "cwe": "CWE-95",
+      "TP": 0,
+      "FP": 1,
+      "FN": 0,
+      "precision": 0.0,
+      "recall": null,
+      "f1": null
+    }
+  ],
+  "true_positives": [
+    {
+      "challenge_key": "christmasSpecialChallenge",
+      "challenge_name": "Christmas Special",
+      "findings": [
+        {
+          "rule_id": "javascript.sequelize.security.audit.sequelize-injection-express.express-sequelize-injection",
+          "uri": "routes/search.ts",
+          "line": 23,
+          "cwes": [
+            "CWE-89"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "dbSchemaChallenge",
+      "challenge_name": "Database Schema",
+      "findings": [
+        {
+          "rule_id": "javascript.sequelize.security.audit.sequelize-injection-express.express-sequelize-injection",
+          "uri": "routes/search.ts",
+          "line": 23,
+          "cwes": [
+            "CWE-89"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "ephemeralAccountantChallenge",
+      "challenge_name": "Ephemeral Accountant",
+      "findings": [
+        {
+          "rule_id": "javascript.sequelize.security.audit.sequelize-injection-express.express-sequelize-injection",
+          "uri": "routes/login.ts",
+          "line": 34,
+          "cwes": [
+            "CWE-89"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "loginAdminChallenge",
+      "challenge_name": "Login Admin",
+      "findings": [
+        {
+          "rule_id": "javascript.sequelize.security.audit.sequelize-injection-express.express-sequelize-injection",
+          "uri": "routes/login.ts",
+          "line": 34,
+          "cwes": [
+            "CWE-89"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "loginBenderChallenge",
+      "challenge_name": "Login Bender",
+      "findings": [
+        {
+          "rule_id": "javascript.sequelize.security.audit.sequelize-injection-express.express-sequelize-injection",
+          "uri": "routes/login.ts",
+          "line": 34,
+          "cwes": [
+            "CWE-89"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "loginJimChallenge",
+      "challenge_name": "Login Jim",
+      "findings": [
+        {
+          "rule_id": "javascript.sequelize.security.audit.sequelize-injection-express.express-sequelize-injection",
+          "uri": "routes/login.ts",
+          "line": 34,
+          "cwes": [
+            "CWE-89"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "redirectChallenge",
+      "challenge_name": "Allowlist Bypass",
+      "findings": [
+        {
+          "rule_id": "javascript.express.security.audit.express-open-redirect.express-open-redirect",
+          "uri": "routes/redirect.ts",
+          "line": 19,
+          "cwes": [
+            "CWE-601"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "redirectCryptoCurrencyChallenge",
+      "challenge_name": "Outdated Allowlist",
+      "findings": [
+        {
+          "rule_id": "javascript.express.security.audit.express-open-redirect.express-open-redirect",
+          "uri": "routes/redirect.ts",
+          "line": 19,
+          "cwes": [
+            "CWE-601"
+          ]
+        }
+      ]
+    },
+    {
+      "challenge_key": "unionSqlInjectionChallenge",
+      "challenge_name": "User Credentials",
+      "findings": [
+        {
+          "rule_id": "javascript.sequelize.security.audit.sequelize-injection-express.express-sequelize-injection",
+          "uri": "routes/search.ts",
+          "line": 23,
+          "cwes": [
+            "CWE-89"
+          ]
+        }
+      ]
+    }
+  ],
+  "false_positives": [
+    {
+      "rule_id": "yaml.github-actions.security.run-shell-injection.run-shell-injection",
+      "uri": ".github/workflows/update-challenges-ebook.yml",
+      "line": 22,
+      "level": "",
+      "severity": "high",
+      "cwes": [
+        "CWE-78"
+      ]
+    },
+    {
+      "rule_id": "yaml.github-actions.security.run-shell-injection.run-shell-injection",
+      "uri": ".github/workflows/update-challenges-www-legacy.yml",
+      "line": 27,
+      "level": "",
+      "severity": "high",
+      "cwes": [
+        "CWE-78"
+      ]
+    },
+    {
+      "rule_id": "yaml.github-actions.security.run-shell-injection.run-shell-injection",
+      "uri": ".github/workflows/update-challenges-www-legacy.yml",
+      "line": 36,
+      "level": "",
+      "severity": "high",
+      "cwes": [
+        "CWE-78"
+      ]
+    },
+    {
+      "rule_id": "yaml.github-actions.security.run-shell-injection.run-shell-injection",
+      "uri": ".github/workflows/update-challenges-www.yml",
+      "line": 27,
+      "level": "",
+      "severity": "high",
+      "cwes": [
+        "CWE-78"
+      ]
+    },
+    {
+      "rule_id": "yaml.github-actions.security.run-shell-injection.run-shell-injection",
+      "uri": ".github/workflows/update-challenges-www.yml",
+      "line": 36,
+      "level": "",
+      "severity": "high",
+      "cwes": [
+        "CWE-78"
+      ]
+    },
+    {
+      "rule_id": "javascript.sequelize.security.audit.sequelize-injection-express.express-sequelize-injection",
+      "uri": "data/static/codefixes/dbSchemaChallenge_1.ts",
+      "line": 5,
+      "level": "",
+      "severity": "high",
+      "cwes": [
+        "CWE-89"
+      ]
+    },
+    {
+      "rule_id": "javascript.sequelize.security.audit.sequelize-injection-express.express-sequelize-injection",
+      "uri": "data/static/codefixes/dbSchemaChallenge_3.ts",
+      "line": 11,
+      "level": "",
+      "severity": "high",
+      "cwes": [
+        "CWE-89"
+      ]
+    },
+    {
+      "rule_id": "javascript.sequelize.security.audit.sequelize-injection-express.express-sequelize-injection",
+      "uri": "data/static/codefixes/unionSqlInjectionChallenge_1.ts",
+      "line": 6,
+      "level": "",
+      "severity": "high",
+      "cwes": [
+        "CWE-89"
+      ]
+    },
+    {
+      "rule_id": "javascript.sequelize.security.audit.sequelize-injection-express.express-sequelize-injection",
+      "uri": "data/static/codefixes/unionSqlInjectionChallenge_3.ts",
+      "line": 10,
+      "level": "",
+      "severity": "high",
+      "cwes": [
+        "CWE-89"
+      ]
+    },
+    {
+      "rule_id": "javascript.jsonwebtoken.security.jwt-hardcode.hardcoded-jwt-secret",
+      "uri": "lib/insecurity.ts",
+      "line": 56,
+      "level": "",
+      "severity": "medium",
+      "cwes": [
+        "CWE-798"
+      ]
+    },
+    {
+      "rule_id": "javascript.express.security.injection.raw-html-format.raw-html-format",
+      "uri": "routes/chatbot.ts",
+      "line": 205,
+      "level": "",
+      "severity": "medium",
+      "cwes": [
+        "CWE-79"
+      ]
+    },
+    {
+      "rule_id": "javascript.express.security.audit.express-res-sendfile.express-res-sendfile",
+      "uri": "routes/fileServer.ts",
+      "line": 33,
+      "level": "",
+      "severity": "medium",
+      "cwes": [
+        "CWE-73"
+      ]
+    },
+    {
+      "rule_id": "javascript.express.security.audit.express-res-sendfile.express-res-sendfile",
+      "uri": "routes/keyServer.ts",
+      "line": 14,
+      "level": "",
+      "severity": "medium",
+      "cwes": [
+        "CWE-73"
+      ]
+    },
+    {
+      "rule_id": "javascript.express.security.audit.express-res-sendfile.express-res-sendfile",
+      "uri": "routes/logfileServer.ts",
+      "line": 14,
+      "level": "",
+      "severity": "medium",
+      "cwes": [
+        "CWE-73"
+      ]
+    },
+    {
+      "rule_id": "javascript.express.security.audit.express-res-sendfile.express-res-sendfile",
+      "uri": "routes/quarantineServer.ts",
+      "line": 14,
+      "level": "",
+      "severity": "medium",
+      "cwes": [
+        "CWE-73"
+      ]
+    },
+    {
+      "rule_id": "javascript.lang.security.audit.code-string-concat.code-string-concat",
+      "uri": "routes/userProfile.ts",
+      "line": 62,
+      "level": "",
+      "severity": "high",
+      "cwes": [
+        "CWE-95"
+      ]
+    },
+    {
+      "rule_id": "javascript.express.security.audit.express-check-directory-listing.express-check-directory-listing",
+      "uri": "server.ts",
+      "line": 269,
+      "level": "",
+      "severity": "medium",
+      "cwes": [
+        "CWE-548"
+      ]
+    },
+    {
+      "rule_id": "javascript.express.security.audit.express-check-directory-listing.express-check-directory-listing",
+      "uri": "server.ts",
+      "line": 273,
+      "level": "",
+      "severity": "medium",
+      "cwes": [
+        "CWE-548"
+      ]
+    },
+    {
+      "rule_id": "javascript.express.security.audit.express-check-directory-listing.express-check-directory-listing",
+      "uri": "server.ts",
+      "line": 277,
+      "level": "",
+      "severity": "medium",
+      "cwes": [
+        "CWE-548"
+      ]
+    },
+    {
+      "rule_id": "javascript.express.security.audit.express-check-directory-listing.express-check-directory-listing",
+      "uri": "server.ts",
+      "line": 281,
+      "level": "",
+      "severity": "medium",
+      "cwes": [
+        "CWE-548"
+      ]
+    }
+  ],
+  "false_negatives": [
+    {
+      "challenge_key": "passwordHashLeakChallenge",
+      "challenge_name": "Password Hash Leak",
+      "category": "Sensitive Data Exposure",
+      "cwe": 200,
+      "vulnerable_files": [
+        "routes/currentUser.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "restfulXssChallenge",
+      "challenge_name": "API-only XSS",
+      "category": "XSS",
+      "cwe": 79,
+      "vulnerable_files": [
+        "frontend/src/app/search-result/search-result.component.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "accessLogDisclosureChallenge",
+      "challenge_name": "Access Log",
+      "category": "Observability Failures",
+      "cwe": 23,
+      "vulnerable_files": [
+        "routes/logfileServer.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "fileWriteChallenge",
+      "challenge_name": "Arbitrary File Write",
+      "category": "Vulnerable Components",
+      "cwe": 22,
+      "vulnerable_files": [
+        "routes/fileUpload.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "rceChallenge",
+      "challenge_name": "Blocked RCE DoS",
+      "category": "Insecure Deserialization",
+      "cwe": 94,
+      "vulnerable_files": [
+        "routes/b2bOrder.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "changePasswordBenderChallenge",
+      "challenge_name": "Change Bender's Password",
+      "category": "Broken Authentication",
+      "cwe": 620,
+      "vulnerable_files": [
+        "routes/changePassword.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "usernameXssChallenge",
+      "challenge_name": "CSP Bypass",
+      "category": "XSS",
+      "cwe": 79,
+      "vulnerable_files": [
+        "routes/userProfile.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "persistedXssUserChallenge",
+      "challenge_name": "Client-side XSS Protection",
+      "category": "XSS",
+      "cwe": 79,
+      "vulnerable_files": [
+        "models/user.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "localXssChallenge",
+      "challenge_name": "DOM XSS",
+      "category": "XSS",
+      "cwe": 79,
+      "vulnerable_files": [
+        "frontend/src/app/search-result/search-result.component.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "easterEggLevelOneChallenge",
+      "challenge_name": "Easter Egg",
+      "category": "Broken Access Control",
+      "cwe": 23,
+      "vulnerable_files": [
+        "routes/fileServer.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "emailLeakChallenge",
+      "challenge_name": "Email Leak",
+      "category": "Sensitive Data Exposure",
+      "cwe": 200,
+      "vulnerable_files": [
+        "routes/currentUser.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "forgedCouponChallenge",
+      "challenge_name": "Forged Coupon",
+      "category": "Cryptographic Issues",
+      "cwe": 347,
+      "vulnerable_files": [
+        "lib/insecurity.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "forgedReviewChallenge",
+      "challenge_name": "Forged Review",
+      "category": "Broken Access Control",
+      "cwe": 284,
+      "vulnerable_files": [
+        "routes/updateProductReviews.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "jwtForgedChallenge",
+      "challenge_name": "Forged Signed JWT",
+      "category": "Vulnerable Components",
+      "cwe": 347,
+      "vulnerable_files": [
+        "lib/insecurity.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "forgottenDevBackupChallenge",
+      "challenge_name": "Forgotten Developer Backup",
+      "category": "Sensitive Data Exposure",
+      "cwe": 23,
+      "vulnerable_files": [
+        "routes/fileServer.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "forgottenBackupChallenge",
+      "challenge_name": "Forgotten Sales Backup",
+      "category": "Sensitive Data Exposure",
+      "cwe": 23,
+      "vulnerable_files": [
+        "routes/fileServer.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "httpHeaderXssChallenge",
+      "challenge_name": "HTTP-Header XSS",
+      "category": "XSS",
+      "cwe": 79,
+      "vulnerable_files": [
+        "frontend/src/app/last-login-ip/last-login-ip.component.ts",
+        "routes/saveLoginIp.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "loginSupportChallenge",
+      "challenge_name": "Login Support Team",
+      "category": "Security Misconfiguration",
+      "cwe": 798,
+      "vulnerable_files": [
+        "routes/login.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "misplacedSignatureFileChallenge",
+      "challenge_name": "Misplaced Signature File",
+      "category": "Observability Failures",
+      "cwe": 23,
+      "vulnerable_files": [
+        "routes/fileServer.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "noSqlCommandChallenge",
+      "challenge_name": "NoSQL DoS",
+      "category": "Injection",
+      "cwe": 943,
+      "vulnerable_files": [
+        "routes/showProductReviews.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "noSqlOrdersChallenge",
+      "challenge_name": "NoSQL Exfiltration",
+      "category": "Injection",
+      "cwe": 943,
+      "vulnerable_files": [
+        "routes/trackOrder.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "noSqlReviewsChallenge",
+      "challenge_name": "NoSQL Manipulation",
+      "category": "Injection",
+      "cwe": 943,
+      "vulnerable_files": [
+        "routes/updateProductReviews.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "reflectedXssChallenge",
+      "challenge_name": "Reflected XSS",
+      "category": "XSS",
+      "cwe": 79,
+      "vulnerable_files": [
+        "frontend/src/app/track-result/track-result.component.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "ssrfChallenge",
+      "challenge_name": "SSRF",
+      "category": "Broken Access Control",
+      "cwe": 918,
+      "vulnerable_files": [
+        "routes/profileImageUrlUpload.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "sstiChallenge",
+      "challenge_name": "SSTi",
+      "category": "Injection",
+      "cwe": 94,
+      "vulnerable_files": [
+        "routes/userProfile.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "persistedXssFeedbackChallenge",
+      "challenge_name": "Server-side XSS Protection",
+      "category": "XSS",
+      "cwe": 79,
+      "vulnerable_files": [
+        "models/feedback.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "rceOccupyChallenge",
+      "challenge_name": "Successful RCE DoS",
+      "category": "Insecure Deserialization",
+      "cwe": 94,
+      "vulnerable_files": [
+        "routes/b2bOrder.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "jwtUnsignedChallenge",
+      "challenge_name": "Unsigned JWT",
+      "category": "Vulnerable Components",
+      "cwe": 347,
+      "vulnerable_files": [
+        "lib/insecurity.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "uploadSizeChallenge",
+      "challenge_name": "Upload Size",
+      "category": "Improper Input Validation",
+      "cwe": 434,
+      "vulnerable_files": [
+        "routes/fileUpload.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "uploadTypeChallenge",
+      "challenge_name": "Upload Type",
+      "category": "Improper Input Validation",
+      "cwe": 434,
+      "vulnerable_files": [
+        "routes/fileUpload.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "videoXssChallenge",
+      "challenge_name": "Video XSS",
+      "category": "XSS",
+      "cwe": 79,
+      "vulnerable_files": [
+        "routes/videoHandler.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "basketAccessChallenge",
+      "challenge_name": "View Basket",
+      "category": "Broken Access Control",
+      "cwe": 639,
+      "vulnerable_files": [
+        "routes/basket.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "weirdCryptoChallenge",
+      "challenge_name": "Weird Crypto",
+      "category": "Cryptographic Issues",
+      "cwe": 916,
+      "vulnerable_files": [
+        "lib/insecurity.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "xxeFileDisclosureChallenge",
+      "challenge_name": "XXE Data Access",
+      "category": "XXE",
+      "cwe": 611,
+      "vulnerable_files": [
+        "routes/fileUpload.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "xxeDosChallenge",
+      "challenge_name": "XXE DoS",
+      "category": "XXE",
+      "cwe": 776,
+      "vulnerable_files": [
+        "routes/fileUpload.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "yamlBombChallenge",
+      "challenge_name": "Memory Bomb",
+      "category": "Insecure Deserialization",
+      "cwe": 400,
+      "vulnerable_files": [
+        "routes/fileUpload.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "csrfChallenge",
+      "challenge_name": "CSRF",
+      "category": "Broken Access Control",
+      "cwe": 352,
+      "vulnerable_files": [
+        "server.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "xssBonusChallenge",
+      "challenge_name": "Bonus Payload",
+      "category": "XSS",
+      "cwe": 79,
+      "vulnerable_files": [
+        "frontend/src/app/search-result/search-result.component.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "nullByteChallenge",
+      "challenge_name": "Poison Null Byte",
+      "category": "Improper Input Validation",
+      "cwe": 23,
+      "vulnerable_files": [
+        "routes/fileServer.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "challenge_key": "lfrChallenge",
+      "challenge_name": "Local File Read",
+      "category": "Vulnerable Components",
+      "cwe": 22,
+      "vulnerable_files": [
+        "routes/dataErasure.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "exposedCredentialsChallenge",
+      "challenge_name": "Exposed credentials",
+      "category": "Sensitive Data Exposure",
+      "cwe": 798,
+      "vulnerable_files": [
+        "routes/login.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "leakedApiKeyChallenge",
+      "challenge_name": "Leaked API Key",
+      "category": "Sensitive Data Exposure",
+      "cwe": 798,
+      "vulnerable_files": [],
+      "confidence": "low"
+    }
+  ],
+  "informational_findings": [],
+  "excluded_findings_count": 0,
+  "excluded_patterns": [
+    "test/",
+    "cypress/",
+    "*.spec.ts",
+    "*.test.ts",
+    "frontend/src/assets/"
+  ]
+}

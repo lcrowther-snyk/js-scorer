@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>SAST Tool Comparison</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 14px; line-height: 1.5; color: #111827; background: #f8fafc;
+  padding: 32px 24px; }
+.page { max-width: 1180px; margin: 0 auto; }
+.hdr-title { font-size: 24px; font-weight: 700; }
+.hdr-meta { color: #6b7280; font-size: 13px; margin-top: 4px; }
+.tool-chips { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { background:#fff; border:1px solid #e5e7eb; border-radius:999px;
+  padding: 4px 12px; font-size: 12px; color: #374151; }
+.chip b { color: #111827; }
+h2 { font-size: 15px; font-weight: 600; color: #111; margin: 32px 0 14px;
+  padding-bottom: 6px; border-bottom: 1px solid #e5e7eb; }
+.card { background:#fff; border:1px solid #e5e7eb; border-radius:8px;
+  padding: 18px 20px; }
+.summary { display: grid; gap: 14px; }
+.summary table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.summary th, .summary td { text-align: right; padding: 10px 12px;
+  border-bottom: 1px solid #f1f5f9; }
+.summary th:first-child, .summary td:first-child { text-align: left;
+  font-weight: 500; color: #374151; }
+.summary thead th { font-size: 11px; text-transform: uppercase;
+  letter-spacing: 0.05em; color: #6b7280; font-weight: 600;
+  border-bottom: 1px solid #e5e7eb; background: #f8fafc; }
+.summary td.lead { font-weight: 700; color: #15803d;
+  background: linear-gradient(0deg, rgba(22,163,74,.08), rgba(22,163,74,.08)); }
+.legend { font-size: 12px; color: #6b7280; margin-top: 8px; }
+.tone-success { color: #16a34a; }
+.tone-warning { color: #d97706; }
+.tone-danger  { color: #dc2626; }
+.tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px; }
+.tool-card { background:#fff; border:1px solid #e5e7eb; border-radius:10px;
+  padding: 18px 20px; }
+.tool-card .tname { font-size: 16px; font-weight: 700; }
+.tool-card .tdriver { font-size: 12px; color:#6b7280; margin-top: 2px; }
+.tool-card .stats { display:grid; grid-template-columns: repeat(2, 1fr);
+  gap: 10px; margin-top: 14px; }
+.tool-card .stat { background:#f8fafc; border:1px solid #f1f5f9;
+  border-radius: 6px; padding: 10px 12px; }
+.tool-card .stat .v { font-size: 18px; font-weight: 700; }
+.tool-card .stat .l { font-size: 10px; color: #6b7280; text-transform: uppercase;
+  letter-spacing: 0.05em; font-weight: 600; margin-top: 2px; }
+.coverage { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px; }
+.coverage .card h3 { font-size: 13px; font-weight: 600; color: #111;
+  margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.coverage .badge { font-size: 11px; background:#eef2ff; color:#3730a3;
+  border-radius:999px; padding: 2px 8px; font-weight:600; }
+.coverage ul { list-style: none; max-height: 360px; overflow-y: auto; }
+.coverage li { padding: 6px 0; border-bottom: 1px solid #f8fafc;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px; color: #374151; }
+.matrix { width: 100%; border-collapse: collapse; font-size: 12px;
+  background:#fff; border:1px solid #e5e7eb; border-radius: 8px;
+  overflow: hidden; }
+.matrix th, .matrix td { padding: 8px 10px; text-align: center;
+  border-bottom: 1px solid #f1f5f9; }
+.matrix th { background:#f8fafc; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.05em; color: #6b7280; }
+.matrix td.k { text-align: left; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: #374151; font-size: 12px; }
+.matrix td.hit { background: #dcfce7; color: #166534; font-weight: 600; }
+.matrix td.miss { color: #cbd5e1; }
+.foot { margin-top: 30px; color: #9ca3af; font-size: 12px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div>
+    <div class="hdr-title">SAST Tool Comparison</div>
+    <div class="hdr-meta">Generated 2026-05-12 01:08 UTC · ground truth: juice-shop-ground-truth.yml ·
+      severity floor: <b>≥ medium</b> ·
+      51 SAST-detectable challenges · 24 caught by at least one tool</div>
+    <div class="tool-chips"><span class="chip"><b>Snyk</b> · SnykCode v1.1300.2 · results-snyk.sarif</span><span class="chip"><b>Semgrep</b> · Semgrep OSS v1.161.0 · results-semgrep.sarif</span><span class="chip"><b>Aikido</b> · Opengrep OSS v1.20.0 · results-aikido.sarif</span></div>
+  </div>
+
+  <h2>Headline metrics</h2>
+  <div class="card summary">
+    <table>
+      <thead><tr><th>Metric</th><th>Snyk</th><th>Semgrep</th><th>Aikido</th></tr></thead>
+      <tbody><tr><td>Findings</td><td class="">34</td><td class="">23</td><td class="">23</td></tr><tr><td>True positives</td><td class="lead">24</td><td class="">9</td><td class="">9</td></tr><tr><td>False positives</td><td class="">22</td><td class="">20</td><td class="">20</td></tr><tr><td>False negatives</td><td class="">27</td><td class="">42</td><td class="">42</td></tr><tr><td>Precision</td><td class="lead">0.522</td><td class="">0.310</td><td class="">0.310</td></tr><tr><td>Recall</td><td class="lead">0.471</td><td class="">0.176</td><td class="">0.176</td></tr><tr><td>F1</td><td class="lead">0.495</td><td class="">0.225</td><td class="">0.225</td></tr><tr><td>Youden J</td><td class="lead">0.012</td><td class="">-0.146</td><td class="">-0.146</td></tr><tr><td>Specificity</td><td class="">0.542</td><td class="">0.677</td><td class="">0.677</td></tr></tbody>
+    </table>
+    <div class="legend">Highlighted cell = clear winner for that metric (ties not highlighted).
+      Tone colours apply to per-tool cards below: green ≥ 0.7, amber ≥ 0.5, red &lt; 0.5
+      (Youden J: green ≥ 0.3, amber ≥ 0, red &lt; 0).</div>
+  </div>
+
+  <h2>Per-tool snapshot</h2>
+  <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tname">Snyk</div>
+          <div class="tdriver">SnykCode v1.1300.2</div>
+          <div class="stats">
+            <div class="stat"><div class="v">24</div><div class="l">True positives</div></div>
+            <div class="stat"><div class="v">22</div><div class="l">False positives</div></div>
+            <div class="stat"><div class="v tone-warning">0.522</div><div class="l">Precision</div></div>
+            <div class="stat"><div class="v tone-danger">0.471</div><div class="l">Recall</div></div>
+            <div class="stat"><div class="v tone-danger">0.495</div><div class="l">F1</div></div>
+            <div class="stat"><div class="v tone-warning">0.012</div><div class="l">Youden J</div></div>
+          </div>
+        </div>
+        <div class="tool-card">
+          <div class="tname">Semgrep</div>
+          <div class="tdriver">Semgrep OSS v1.161.0</div>
+          <div class="stats">
+            <div class="stat"><div class="v">9</div><div class="l">True positives</div></div>
+            <div class="stat"><div class="v">20</div><div class="l">False positives</div></div>
+            <div class="stat"><div class="v tone-danger">0.310</div><div class="l">Precision</div></div>
+            <div class="stat"><div class="v tone-danger">0.176</div><div class="l">Recall</div></div>
+            <div class="stat"><div class="v tone-danger">0.225</div><div class="l">F1</div></div>
+            <div class="stat"><div class="v tone-danger">-0.146</div><div class="l">Youden J</div></div>
+          </div>
+        </div>
+        <div class="tool-card">
+          <div class="tname">Aikido</div>
+          <div class="tdriver">Opengrep OSS v1.20.0</div>
+          <div class="stats">
+            <div class="stat"><div class="v">9</div><div class="l">True positives</div></div>
+            <div class="stat"><div class="v">20</div><div class="l">False positives</div></div>
+            <div class="stat"><div class="v tone-danger">0.310</div><div class="l">Precision</div></div>
+            <div class="stat"><div class="v tone-danger">0.176</div><div class="l">Recall</div></div>
+            <div class="stat"><div class="v tone-danger">0.225</div><div class="l">F1</div></div>
+            <div class="stat"><div class="v tone-danger">-0.146</div><div class="l">Youden J</div></div>
+          </div>
+        </div></div>
+
+  <h2>Challenge coverage</h2>
+  <div class="coverage">
+      <div class="card">
+        <h3>Caught by all <span class="badge">9</span></h3>
+        <ul><li>christmasSpecialChallenge</li><li>dbSchemaChallenge</li><li>ephemeralAccountantChallenge</li><li>loginAdminChallenge</li><li>loginBenderChallenge</li><li>loginJimChallenge</li><li>redirectChallenge</li><li>redirectCryptoCurrencyChallenge</li><li>unionSqlInjectionChallenge</li></ul>
+      </div>
+        <div class="card">
+          <h3>Only by Snyk <span class="badge">15</span></h3>
+          <ul><li>accessLogDisclosureChallenge</li><li>csrfChallenge</li><li>easterEggLevelOneChallenge</li><li>forgottenBackupChallenge</li><li>forgottenDevBackupChallenge</li><li>httpHeaderXssChallenge</li><li>localXssChallenge</li><li>misplacedSignatureFileChallenge</li><li>noSqlReviewsChallenge</li><li>nullByteChallenge</li><li>reflectedXssChallenge</li><li>restfulXssChallenge</li><li>ssrfChallenge</li><li>usernameXssChallenge</li><li>xssBonusChallenge</li></ul>
+        </div>
+        <div class="card">
+          <h3>Only by Semgrep <span class="badge">0</span></h3>
+          <ul><li>—</li></ul>
+        </div>
+        <div class="card">
+          <h3>Only by Aikido <span class="badge">0</span></h3>
+          <ul><li>—</li></ul>
+        </div>
+      <div class="card">
+        <h3>Missed by all <span class="badge">27</span></h3>
+        <ul><li>basketAccessChallenge</li><li>changePasswordBenderChallenge</li><li>emailLeakChallenge</li><li>exposedCredentialsChallenge</li><li>fileWriteChallenge</li><li>forgedCouponChallenge</li><li>forgedReviewChallenge</li><li>jwtForgedChallenge</li><li>jwtUnsignedChallenge</li><li>leakedApiKeyChallenge</li><li>lfrChallenge</li><li>loginSupportChallenge</li><li>noSqlCommandChallenge</li><li>noSqlOrdersChallenge</li><li>passwordHashLeakChallenge</li><li>persistedXssFeedbackChallenge</li><li>persistedXssUserChallenge</li><li>rceChallenge</li><li>rceOccupyChallenge</li><li>sstiChallenge</li><li>uploadSizeChallenge</li><li>uploadTypeChallenge</li><li>videoXssChallenge</li><li>weirdCryptoChallenge</li><li>xxeDosChallenge</li><li>xxeFileDisclosureChallenge</li><li>yamlBombChallenge</li></ul>
+      </div></div>
+
+  <h2>Per-challenge matrix</h2>
+  <table class="matrix">
+    <thead><tr><th>Challenge</th><th>Snyk</th><th>Semgrep</th><th>Aikido</th></tr></thead>
+    <tbody><tr><td class="k">accessLogDisclosureChallenge</td><td class="hit">●</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">basketAccessChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">changePasswordBenderChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">christmasSpecialChallenge</td><td class="hit">●</td><td class="hit">●</td><td class="hit">●</td></tr><tr><td class="k">csrfChallenge</td><td class="hit">●</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">dbSchemaChallenge</td><td class="hit">●</td><td class="hit">●</td><td class="hit">●</td></tr><tr><td class="k">easterEggLevelOneChallenge</td><td class="hit">●</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">emailLeakChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">ephemeralAccountantChallenge</td><td class="hit">●</td><td class="hit">●</td><td class="hit">●</td></tr><tr><td class="k">exposedCredentialsChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">fileWriteChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">forgedCouponChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">forgedReviewChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">forgottenBackupChallenge</td><td class="hit">●</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">forgottenDevBackupChallenge</td><td class="hit">●</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">httpHeaderXssChallenge</td><td class="hit">●</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">jwtForgedChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">jwtUnsignedChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">leakedApiKeyChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">lfrChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">localXssChallenge</td><td class="hit">●</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">loginAdminChallenge</td><td class="hit">●</td><td class="hit">●</td><td class="hit">●</td></tr><tr><td class="k">loginBenderChallenge</td><td class="hit">●</td><td class="hit">●</td><td class="hit">●</td></tr><tr><td class="k">loginJimChallenge</td><td class="hit">●</td><td class="hit">●</td><td class="hit">●</td></tr><tr><td class="k">loginSupportChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">misplacedSignatureFileChallenge</td><td class="hit">●</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">noSqlCommandChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">noSqlOrdersChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">noSqlReviewsChallenge</td><td class="hit">●</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">nullByteChallenge</td><td class="hit">●</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">passwordHashLeakChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">persistedXssFeedbackChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">persistedXssUserChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">rceChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">rceOccupyChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">redirectChallenge</td><td class="hit">●</td><td class="hit">●</td><td class="hit">●</td></tr><tr><td class="k">redirectCryptoCurrencyChallenge</td><td class="hit">●</td><td class="hit">●</td><td class="hit">●</td></tr><tr><td class="k">reflectedXssChallenge</td><td class="hit">●</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">restfulXssChallenge</td><td class="hit">●</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">ssrfChallenge</td><td class="hit">●</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">sstiChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">unionSqlInjectionChallenge</td><td class="hit">●</td><td class="hit">●</td><td class="hit">●</td></tr><tr><td class="k">uploadSizeChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">uploadTypeChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">usernameXssChallenge</td><td class="hit">●</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">videoXssChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">weirdCryptoChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">xssBonusChallenge</td><td class="hit">●</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">xxeDosChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">xxeFileDisclosureChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr><tr><td class="k">yamlBombChallenge</td><td class="miss">○</td><td class="miss">○</td><td class="miss">○</td></tr></tbody>
+  </table>
+
+  <div class="foot">score_sarif.py · compare_scorecards.py</div>
+</div>
+</body>
+</html>

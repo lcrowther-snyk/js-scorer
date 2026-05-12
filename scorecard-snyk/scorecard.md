@@ -1,7 +1,7 @@
 # SAST Scorecard
 
 **Tool:** SnykCode 1.1300.2  
-**SARIF:** `results.sarif`  
+**SARIF:** `results-snyk.sarif`  
 **Ground truth:** `juice-shop-ground-truth.yml`  
 
 ## Headline metrics
@@ -11,16 +11,16 @@
 | Total findings | 253 |
 | Excluded (path filter) | 200 |
 | Informational (CWE filter) | 5 |
-| In-scope findings | 48 |
+| In-scope findings | 34 |
 | SAST-detectable challenges | 51 |
-| TP | 25 |
-| FP | 35 |
-| FN | 26 |
-| TN | 25 |
-| Precision | 0.4167 |
-| Recall | 0.4902 |
-| F1 | 0.4505 |
-| Youden's J | -0.0931 |
+| TP | 24 |
+| FP | 22 |
+| FN | 27 |
+| TN | 26 |
+| Precision | 0.5217 |
+| Recall | 0.4706 |
+| F1 | 0.4948 |
+| Youden's J | 0.0123 |
 
 > **TN formula:** For each FN challenge, each (vulnerable_file, CWE) pair where no finding was emitted counts as one TN (per OWASP Benchmark convention).
 
@@ -28,7 +28,6 @@
 
 | CWE | TP | FP | FN | Precision | Recall | F1 |
 |-----|----|----|----|-----------|--------|----|
-| CWE-1287 | 0 | 12 | 0 | 0.0000 | n/a | n/a |
 | CWE-1321 | 0 | 2 | 0 | 0.0000 | n/a | n/a |
 | CWE-200 | 0 | 0 | 2 | n/a | 0.0000 | n/a |
 | CWE-22 | 0 | 0 | 2 | n/a | 0.0000 | n/a |
@@ -48,7 +47,7 @@
 | CWE-79 | 6 | 1 | 3 | 0.8571 | 0.6667 | 0.7500 |
 | CWE-798 | 0 | 1 | 3 | 0.0000 | 0.0000 | n/a |
 | CWE-89 | 7 | 3 | 0 | 0.7000 | 1.0000 | 0.8235 |
-| CWE-916 | 1 | 1 | 0 | 0.5000 | 1.0000 | 0.6667 |
+| CWE-916 | 0 | 0 | 1 | n/a | 0.0000 | n/a |
 | CWE-918 | 1 | 0 | 0 | 1.0000 | 1.0000 | 1.0000 |
 | CWE-94 | 0 | 0 | 3 | n/a | 0.0000 | n/a |
 | CWE-943 | 1 | 4 | 2 | 0.2000 | 0.3333 | 0.2500 |
@@ -147,10 +146,6 @@
 
 - `javascript/XSS` → `routes/userProfile.ts` L98  CWEs: CWE-79
 
-### TP: Weird Crypto (`weirdCryptoChallenge`)
-
-- `javascript/InsecureHash` → `lib/insecurity.ts` L43  CWEs: CWE-916
-
 ### TP: Bonus Payload (`xssBonusChallenge`)
 
 - `javascript/XSS` → `frontend/src/app/search-result/search-result.component.ts` L170  CWEs: CWE-79
@@ -161,13 +156,8 @@ Findings that matched no SAST-detectable challenge (by file + CWE).
 
 | Rule | File | Line | CWEs |
 |------|------|------|------|
-| `javascript/HTTPSourceWithUncheckedType` | `routes/currentUser.ts` | 23 | CWE-1287 |
-| `javascript/HTTPSourceWithUncheckedType` | `routes/profileImageUrlUpload.ts` | 20 | CWE-1287 |
-| `javascript/InsecureHash` | `Gruntfile.js` | 77 | CWE-916 |
 | `javascript/JwtDecodeMethod` | `routes/authenticatedUsers.ts` | 20 | CWE-347 |
 | `javascript/NoHardcodedPasswords` | `models/index.ts` | 30 | CWE-259, CWE-798 |
-| `javascript/HTTPSourceWithUncheckedType` | `routes/profileImageUrlUpload.ts` | 28 | CWE-1287 |
-| `javascript/HTTPSourceWithUncheckedType` | `routes/profileImageUrlUpload.ts` | 28 | CWE-1287 |
 | `javascript/NoRateLimitingForExpensiveWebOperation` | `routes/dataErasure.ts` | 18 | CWE-770 |
 | `javascript/NoRateLimitingForExpensiveWebOperation` | `routes/dataErasure.ts` | 54 | CWE-770 |
 | `javascript/NoRateLimitingForExpensiveWebOperation` | `routes/easterEgg.ts` | 12 | CWE-770 |
@@ -184,18 +174,10 @@ Findings that matched no SAST-detectable challenge (by file + CWE).
 | `javascript/PT` | `routes/profileImageUrlUpload.ts` | 29 | CWE-23 |
 | `javascript/PrototypePollution` | `routes/vulnCodeFixes.ts` | 92 | CWE-1321 |
 | `javascript/PrototypePollution` | `routes/vulnCodeSnippet.ts` | 110 | CWE-1321 |
-| `javascript/HTTPSourceWithUncheckedType` | `routes/vulnCodeSnippet.ts` | 63 | CWE-1287 |
-| `javascript/HTTPSourceWithUncheckedType` | `server.ts` | 409 | CWE-1287 |
-| `javascript/HTTPSourceWithUncheckedType` | `server.ts` | 409 | CWE-1287 |
 | `javascript/Sqli` | `data/static/codefixes/dbSchemaChallenge_1.ts` | 5 | CWE-89 |
 | `javascript/Sqli` | `data/static/codefixes/unionSqlInjectionChallenge_1.ts` | 6 | CWE-89 |
 | `javascript/Sqli` | `data/static/codefixes/unionSqlInjectionChallenge_3.ts` | 10 | CWE-89 |
 | `javascript/XSS` | `routes/recycles.ts` | 17 | CWE-79 |
-| `javascript/HTTPSourceWithUncheckedType` | `routes/vulnCodeSnippet.ts` | 64 | CWE-1287 |
-| `javascript/HTTPSourceWithUncheckedType` | `routes/vulnCodeSnippet.ts` | 66 | CWE-1287 |
-| `javascript/HTTPSourceWithUncheckedType` | `server.ts` | 410 | CWE-1287 |
-| `javascript/HTTPSourceWithUncheckedType` | `server.ts` | 411 | CWE-1287 |
-| `javascript/HTTPSourceWithUncheckedType` | `server.ts` | 412 | CWE-1287 |
 
 ## False Negatives
 
@@ -223,6 +205,7 @@ SAST-detectable challenges with zero matching findings.
 | Upload Type | Improper Input Validation | 434 | `routes/fileUpload.ts` | high |
 | Video XSS | XSS | 79 | `routes/videoHandler.ts` | medium |
 | View Basket | Broken Access Control | 639 | `routes/basket.ts` | high |
+| Weird Crypto | Cryptographic Issues | 916 | `lib/insecurity.ts` | high |
 | XXE Data Access | XXE | 611 | `routes/fileUpload.ts` | high |
 | XXE DoS | XXE | 776 | `routes/fileUpload.ts` | high |
 | Memory Bomb | Insecure Deserialization | 400 | `routes/fileUpload.ts` | medium |

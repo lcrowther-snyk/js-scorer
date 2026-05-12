@@ -12,6 +12,7 @@ import json
 import logging
 import math
 import os
+import re
 import sys
 from collections import defaultdict
 from typing import Any
@@ -35,28 +36,133 @@ DEFAULT_EXCLUDE_PATTERNS = [
 
 DEFAULT_INFORMATIONAL_CWES = {"CWE-547", "CWE-319"}
 
+# Severity model — ordered low → critical.  "info" is reserved for findings
+# the tool itself classifies as informational (SARIF level "none"/"note" with
+# no CVSS score).  "low" is the default minimum, i.e. no filtering.
+SEVERITY_ORDER = ["info", "low", "medium", "high", "critical"]
+SEVERITY_RANK = {s: i for i, s in enumerate(SEVERITY_ORDER)}
+
+# SARIF result.level → severity bucket fallback when no numeric score present.
+_LEVEL_TO_SEVERITY = {
+    "error":   "high",
+    "warning": "medium",
+    "note":    "low",
+    "none":    "info",
+    "":        "info",
+}
+
 
 # ──────────────────────────────────────────────────────────────────────────────
 # Helpers
 # ──────────────────────────────────────────────────────────────────────────────
 
+_CWE_RE = re.compile(r"CWE[-_ ]?(\d+)", re.IGNORECASE)
+
+
 def _norm_cwe(raw: Any) -> set[str]:
-    """Normalise a CWE value (int, str, list) to a set of 'CWE-NNN' strings."""
+    """Normalise a CWE value (int, str, list, dict) to a set of 'CWE-NNN' strings.
+
+    Tolerates the various ways different SARIF emitters encode CWEs:
+      - Snyk: list of "CWE-79" strings under rule.properties.cwe
+      - Semgrep / Opengrep / Aikido: tag strings like "CWE-79: Improper ..."
+        or a single descriptive string under rule.properties.cwe
+      - Taxonomy refs with bare numeric id ("79") under result.taxa[].id
+    """
     if raw is None:
+        return set()
+    if isinstance(raw, bool):
         return set()
     if isinstance(raw, int):
         return {f"CWE-{raw}"}
     if isinstance(raw, str):
         s = raw.strip()
-        if s.upper().startswith("CWE-"):
-            return {s.upper()}
-        return {f"CWE-{s}"}
+        # Extract every CWE-NNN occurrence from the string (handles
+        # "CWE-79: Improper Neutralization ..." style tags).
+        matches = _CWE_RE.findall(s)
+        if matches:
+            return {f"CWE-{m}" for m in matches}
+        # Bare numeric string like "79" — only accept if it looks like an ID.
+        if s.isdigit():
+            return {f"CWE-{s}"}
+        return set()
     if isinstance(raw, list):
         result: set[str] = set()
         for item in raw:
             result |= _norm_cwe(item)
         return result
+    if isinstance(raw, dict):
+        # e.g. {"id": "79"} or {"id": "CWE-79"}
+        return _norm_cwe(raw.get("id"))
     return set()
+
+
+def _extract_rule_cwes(rule: dict) -> set[str]:
+    """Pull CWEs from every place known SARIF emitters stash them on a rule."""
+    cwes: set[str] = set()
+    props = rule.get("properties", {}) or {}
+    # Direct fields (Snyk, some Semgrep configs)
+    cwes |= _norm_cwe(props.get("cwe"))
+    cwes |= _norm_cwe(props.get("cwes"))
+    # Tags (Semgrep / Opengrep / Aikido) — strings like "CWE-79: ..."
+    cwes |= _norm_cwe(props.get("tags"))
+    # SARIF relationships referencing the CWE taxonomy
+    for rel in rule.get("relationships", []) or []:
+        target = (rel.get("target") or {})
+        tc = (target.get("toolComponent") or {}).get("name", "")
+        if "cwe" in str(tc).lower():
+            cwes |= _norm_cwe(target.get("id"))
+    return cwes
+
+
+def _cvss_to_severity(score: float) -> str:
+    """CVSS-style 0–10 score → severity bucket (matches GitHub/Snyk convention)."""
+    if score >= 9.0: return "critical"
+    if score >= 7.0: return "high"
+    if score >= 4.0: return "medium"
+    if score > 0.0:  return "low"
+    return "info"
+
+
+def _severity_from_props(props: dict) -> str | None:
+    """Pull a severity bucket out of a SARIF properties bag.
+
+    Recognises (in priority order):
+      - properties["security-severity"]  (numeric CVSS, GitHub/Snyk/Semgrep)
+      - properties["severity"]            (free-form: critical/high/medium/low/info)
+      - properties["problem.severity"]    (CodeQL: error/warning/note)
+    Returns None if nothing usable was found, so the caller can fall back.
+    """
+    if not props:
+        return None
+    raw = props.get("security-severity") or props.get("securitySeverity")
+    if raw is not None:
+        try:
+            return _cvss_to_severity(float(raw))
+        except (TypeError, ValueError):
+            pass
+    sev = props.get("severity") or props.get("problem.severity")
+    if isinstance(sev, str):
+        s = sev.strip().lower()
+        if s.startswith("crit"):   return "critical"
+        if s == "high" or s == "error":   return "high"
+        if s == "medium" or s == "moderate" or s == "warning": return "medium"
+        if s == "low":             return "low"
+        if s in {"info", "informational", "note", "none"}: return "info"
+    return None
+
+
+def _extract_result_cwes(result: dict) -> set[str]:
+    """Pull CWEs declared on an individual result (taxa, properties)."""
+    cwes: set[str] = set()
+    props = result.get("properties", {}) or {}
+    cwes |= _norm_cwe(props.get("cwe"))
+    cwes |= _norm_cwe(props.get("cwes"))
+    cwes |= _norm_cwe(props.get("tags"))
+    for tx in result.get("taxa", []) or []:
+        tc = (tx.get("toolComponent") or {}).get("name", "")
+        if "cwe" in str(tc).lower() or tx.get("toolComponent") is None:
+            cwes |= _norm_cwe(tx.get("id"))
+    return cwes
 
 
 def _path_excluded(uri: str, patterns: list[str]) -> bool:
@@ -122,12 +228,31 @@ def parse_sarif(path: str) -> tuple[str, str, list[dict]]:
         tool_name = driver.get("name", tool_name)
         tool_version = driver.get("version", driver.get("semanticVersion", tool_version))
 
-        # Build rule_id -> [cwes] lookup once per run
+        # Build rule_id -> [cwes] lookup once per run. Also index by rule
+        # array position to support results that reference rules via
+        # `ruleIndex` instead of `ruleId` (common in Semgrep/Opengrep output).
+        rules = driver.get("rules", []) or []
+        # Pull rules from extensions too (Semgrep registers some rules there).
+        for ext in run.get("tool", {}).get("extensions", []) or []:
+            rules += ext.get("rules", []) or []
         rule_cwes: dict[str, set[str]] = {}
-        for rule in driver.get("rules", []):
+        rule_cwes_by_idx: list[set[str]] = []
+        rule_sev: dict[str, str | None] = {}
+        rule_sev_by_idx: list[str | None] = []
+        for rule in rules:
             rid = rule.get("id", "")
-            cwes = _norm_cwe(rule.get("properties", {}).get("cwe"))
-            rule_cwes[rid] = cwes
+            cwes = _extract_rule_cwes(rule)
+            sev = _severity_from_props(rule.get("properties", {}) or {})
+            # Try defaultConfiguration.level if properties had nothing.
+            if sev is None:
+                dc_level = (rule.get("defaultConfiguration") or {}).get("level")
+                if dc_level:
+                    sev = _LEVEL_TO_SEVERITY.get(dc_level.lower())
+            if rid:
+                rule_cwes[rid] = cwes
+                rule_sev[rid] = sev
+            rule_cwes_by_idx.append(cwes)
+            rule_sev_by_idx.append(sev)
 
         for result in run.get("results", []):
             locs = result.get("locations", [])
@@ -137,14 +262,32 @@ def parse_sarif(path: str) -> tuple[str, str, list[dict]]:
             uri = phys.get("artifactLocation", {}).get("uri", "")
             region = phys.get("region", {})
             rule_id = result.get("ruleId", "")
+            rule_idx = result.get("ruleIndex")
+            cwes = set(rule_cwes.get(rule_id, set()))
+            if not cwes and isinstance(rule_idx, int) and 0 <= rule_idx < len(rule_cwes_by_idx):
+                cwes |= rule_cwes_by_idx[rule_idx]
+            # Fallback: CWEs declared on the result itself.
+            cwes |= _extract_result_cwes(result)
+
+            # Severity: prefer per-result props, then rule props, then SARIF level.
+            level = result.get("level", "") or ""
+            severity = _severity_from_props(result.get("properties", {}) or {})
+            if severity is None:
+                severity = rule_sev.get(rule_id)
+            if severity is None and isinstance(rule_idx, int) and 0 <= rule_idx < len(rule_sev_by_idx):
+                severity = rule_sev_by_idx[rule_idx]
+            if severity is None:
+                severity = _LEVEL_TO_SEVERITY.get(level.lower(), "info")
+
             all_findings.append(
                 {
                     "rule_id": rule_id,
                     "uri": uri,
                     "start_line": region.get("startLine"),
                     "end_line": region.get("endLine"),
-                    "level": result.get("level", ""),
-                    "cwes": rule_cwes.get(rule_id, set()),
+                    "level": level,
+                    "severity": severity,
+                    "cwes": cwes,
                 }
             )
 
@@ -517,6 +660,7 @@ def score(
     exclude_patterns: list[str],
     informational_cwes: set[str],
     write_html: bool = False,
+    min_severity: str = "low",
 ) -> None:
     tool_name, tool_version, raw_findings = parse_sarif(sarif_path)
     challenges = load_ground_truth(gt_path)
@@ -534,6 +678,19 @@ def score(
 
     log.info("Total findings: %d", total)
     log.info("Excluded (path filter): %d", len(excluded))
+
+    # ── Step 1b: drop anything below the requested severity threshold ──────
+    min_rank = SEVERITY_RANK[min_severity]
+    severity_filtered: list[dict] = []
+    if min_rank > 0:
+        keep: list[dict] = []
+        for f in in_scope_candidates:
+            if SEVERITY_RANK.get(f.get("severity", "info"), 0) < min_rank:
+                severity_filtered.append(f)
+            else:
+                keep.append(f)
+        in_scope_candidates = keep
+        log.info("Filtered below severity %s: %d", min_severity, len(severity_filtered))
 
     # ── Step 2: split informational vs. real ────────────────────────────────
     informational: list[dict] = []
@@ -650,10 +807,12 @@ def score(
         "totals": {
             "total_findings": total,
             "excluded": len(excluded),
+            "severity_filtered": len(severity_filtered),
             "informational": len(informational),
             "in_scope": len(scored_findings),
             "sast_detectable_challenges": len(detectable),
         },
+        "min_severity": min_severity,
         "metrics": {
             "TP": TP, "FP": FP, "FN": FN, "TN": TN,
             "precision": precision,
@@ -683,6 +842,7 @@ def score(
         "false_positives": [
             {"rule_id": f["rule_id"], "uri": f["uri"],
              "line": f["start_line"], "level": f["level"],
+             "severity": f.get("severity", "info"),
              "cwes": sorted(f["cwes"])}
             for f in fp_findings
         ],
@@ -869,6 +1029,16 @@ def main() -> None:
             "precision/recall (default: %(default)s)"
         ),
     )
+    parser.add_argument(
+        "--min-severity",
+        choices=SEVERITY_ORDER,
+        default="low",
+        help=(
+            "Drop findings strictly below this severity before scoring. "
+            "Severity is taken from SARIF properties.security-severity / "
+            "properties.severity / level (default: %(default)s — no filtering)."
+        ),
+    )
     args = parser.parse_args()
 
     exclude = [p.strip() for p in args.exclude_paths.split(",") if p.strip()]
@@ -883,6 +1053,7 @@ def main() -> None:
         exclude_patterns=exclude,
         informational_cwes=info_cwes,
         write_html=args.html,
+        min_severity=args.min_severity,
     )
 
 

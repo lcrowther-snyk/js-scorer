@@ -1,37 +1,30 @@
 {
   "tool": "SnykCode",
   "tool_version": "1.1300.2",
-  "sarif": "results.sarif",
+  "sarif": "results-snyk.sarif",
   "ground_truth": "juice-shop-ground-truth.yml",
   "totals": {
     "total_findings": 253,
     "excluded": 200,
+    "severity_filtered": 14,
     "informational": 5,
-    "in_scope": 48,
+    "in_scope": 34,
     "sast_detectable_challenges": 51
   },
+  "min_severity": "medium",
   "metrics": {
-    "TP": 25,
-    "FP": 35,
-    "FN": 26,
-    "TN": 25,
-    "precision": 0.4166666666666667,
-    "recall": 0.49019607843137253,
-    "f1": 0.45045045045045046,
-    "youden_j": -0.09313725490196079,
-    "specificity": 0.4166666666666667,
+    "TP": 24,
+    "FP": 22,
+    "FN": 27,
+    "TN": 26,
+    "precision": 0.5217391304347826,
+    "recall": 0.47058823529411764,
+    "f1": 0.49484536082474223,
+    "youden_j": 0.01225490196078427,
+    "specificity": 0.5416666666666666,
     "TN_formula": "For each FN challenge, each (vulnerable_file, CWE) pair where no finding was emitted counts as one TN (per OWASP Benchmark convention)."
   },
   "per_cwe": [
-    {
-      "cwe": "CWE-1287",
-      "TP": 0,
-      "FP": 12,
-      "FN": 0,
-      "precision": 0.0,
-      "recall": null,
-      "f1": null
-    },
     {
       "cwe": "CWE-1321",
       "TP": 0,
@@ -205,12 +198,12 @@
     },
     {
       "cwe": "CWE-916",
-      "TP": 1,
-      "FP": 1,
-      "FN": 0,
-      "precision": 0.5,
-      "recall": 1.0,
-      "f1": 0.6666666666666666
+      "TP": 0,
+      "FP": 0,
+      "FN": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
     },
     {
       "cwe": "CWE-918",
@@ -564,20 +557,6 @@
       ]
     },
     {
-      "challenge_key": "weirdCryptoChallenge",
-      "challenge_name": "Weird Crypto",
-      "findings": [
-        {
-          "rule_id": "javascript/InsecureHash",
-          "uri": "lib/insecurity.ts",
-          "line": 43,
-          "cwes": [
-            "CWE-916"
-          ]
-        }
-      ]
-    },
-    {
       "challenge_key": "xssBonusChallenge",
       "challenge_name": "Bonus Payload",
       "findings": [
@@ -594,37 +573,11 @@
   ],
   "false_positives": [
     {
-      "rule_id": "javascript/HTTPSourceWithUncheckedType",
-      "uri": "routes/currentUser.ts",
-      "line": 23,
-      "level": "note",
-      "cwes": [
-        "CWE-1287"
-      ]
-    },
-    {
-      "rule_id": "javascript/HTTPSourceWithUncheckedType",
-      "uri": "routes/profileImageUrlUpload.ts",
-      "line": 20,
-      "level": "note",
-      "cwes": [
-        "CWE-1287"
-      ]
-    },
-    {
-      "rule_id": "javascript/InsecureHash",
-      "uri": "Gruntfile.js",
-      "line": 77,
-      "level": "note",
-      "cwes": [
-        "CWE-916"
-      ]
-    },
-    {
       "rule_id": "javascript/JwtDecodeMethod",
       "uri": "routes/authenticatedUsers.ts",
       "line": 20,
       "level": "warning",
+      "severity": "medium",
       "cwes": [
         "CWE-347"
       ]
@@ -634,27 +587,10 @@
       "uri": "models/index.ts",
       "line": 30,
       "level": "warning",
+      "severity": "medium",
       "cwes": [
         "CWE-259",
         "CWE-798"
-      ]
-    },
-    {
-      "rule_id": "javascript/HTTPSourceWithUncheckedType",
-      "uri": "routes/profileImageUrlUpload.ts",
-      "line": 28,
-      "level": "note",
-      "cwes": [
-        "CWE-1287"
-      ]
-    },
-    {
-      "rule_id": "javascript/HTTPSourceWithUncheckedType",
-      "uri": "routes/profileImageUrlUpload.ts",
-      "line": 28,
-      "level": "note",
-      "cwes": [
-        "CWE-1287"
       ]
     },
     {
@@ -662,6 +598,7 @@
       "uri": "routes/dataErasure.ts",
       "line": 18,
       "level": "warning",
+      "severity": "medium",
       "cwes": [
         "CWE-770"
       ]
@@ -671,6 +608,7 @@
       "uri": "routes/dataErasure.ts",
       "line": 54,
       "level": "warning",
+      "severity": "medium",
       "cwes": [
         "CWE-770"
       ]
@@ -680,6 +618,7 @@
       "uri": "routes/easterEgg.ts",
       "line": 12,
       "level": "warning",
+      "severity": "medium",
       "cwes": [
         "CWE-770"
       ]
@@ -689,6 +628,7 @@
       "uri": "routes/premiumReward.ts",
       "line": 12,
       "level": "warning",
+      "severity": "medium",
       "cwes": [
         "CWE-770"
       ]
@@ -698,6 +638,7 @@
       "uri": "routes/privacyPolicyProof.ts",
       "line": 12,
       "level": "warning",
+      "severity": "medium",
       "cwes": [
         "CWE-770"
       ]
@@ -707,6 +648,7 @@
       "uri": "routes/profileImageUrlUpload.ts",
       "line": 17,
       "level": "warning",
+      "severity": "medium",
       "cwes": [
         "CWE-770"
       ]
@@ -716,6 +658,7 @@
       "uri": "routes/videoHandler.ts",
       "line": 52,
       "level": "warning",
+      "severity": "medium",
       "cwes": [
         "CWE-770"
       ]
@@ -725,6 +668,7 @@
       "uri": "routes/likeProductReviews.ts",
       "line": 25,
       "level": "error",
+      "severity": "high",
       "cwes": [
         "CWE-943"
       ]
@@ -734,6 +678,7 @@
       "uri": "routes/likeProductReviews.ts",
       "line": 43,
       "level": "error",
+      "severity": "high",
       "cwes": [
         "CWE-943"
       ]
@@ -743,6 +688,7 @@
       "uri": "routes/likeProductReviews.ts",
       "line": 35,
       "level": "error",
+      "severity": "high",
       "cwes": [
         "CWE-943"
       ]
@@ -752,6 +698,7 @@
       "uri": "routes/likeProductReviews.ts",
       "line": 50,
       "level": "error",
+      "severity": "high",
       "cwes": [
         "CWE-943"
       ]
@@ -761,6 +708,7 @@
       "uri": "routes/keyServer.ts",
       "line": 14,
       "level": "error",
+      "severity": "high",
       "cwes": [
         "CWE-23"
       ]
@@ -770,6 +718,7 @@
       "uri": "routes/quarantineServer.ts",
       "line": 14,
       "level": "error",
+      "severity": "high",
       "cwes": [
         "CWE-23"
       ]
@@ -779,6 +728,7 @@
       "uri": "routes/profileImageUrlUpload.ts",
       "line": 29,
       "level": "error",
+      "severity": "high",
       "cwes": [
         "CWE-23"
       ]
@@ -788,6 +738,7 @@
       "uri": "routes/vulnCodeFixes.ts",
       "line": 92,
       "level": "warning",
+      "severity": "medium",
       "cwes": [
         "CWE-1321"
       ]
@@ -797,35 +748,9 @@
       "uri": "routes/vulnCodeSnippet.ts",
       "line": 110,
       "level": "warning",
+      "severity": "medium",
       "cwes": [
         "CWE-1321"
-      ]
-    },
-    {
-      "rule_id": "javascript/HTTPSourceWithUncheckedType",
-      "uri": "routes/vulnCodeSnippet.ts",
-      "line": 63,
-      "level": "note",
-      "cwes": [
-        "CWE-1287"
-      ]
-    },
-    {
-      "rule_id": "javascript/HTTPSourceWithUncheckedType",
-      "uri": "server.ts",
-      "line": 409,
-      "level": "note",
-      "cwes": [
-        "CWE-1287"
-      ]
-    },
-    {
-      "rule_id": "javascript/HTTPSourceWithUncheckedType",
-      "uri": "server.ts",
-      "line": 409,
-      "level": "note",
-      "cwes": [
-        "CWE-1287"
       ]
     },
     {
@@ -833,6 +758,7 @@
       "uri": "data/static/codefixes/dbSchemaChallenge_1.ts",
       "line": 5,
       "level": "error",
+      "severity": "high",
       "cwes": [
         "CWE-89"
       ]
@@ -842,6 +768,7 @@
       "uri": "data/static/codefixes/unionSqlInjectionChallenge_1.ts",
       "line": 6,
       "level": "error",
+      "severity": "high",
       "cwes": [
         "CWE-89"
       ]
@@ -851,6 +778,7 @@
       "uri": "data/static/codefixes/unionSqlInjectionChallenge_3.ts",
       "line": 10,
       "level": "error",
+      "severity": "high",
       "cwes": [
         "CWE-89"
       ]
@@ -860,53 +788,9 @@
       "uri": "routes/recycles.ts",
       "line": 17,
       "level": "error",
+      "severity": "medium",
       "cwes": [
         "CWE-79"
-      ]
-    },
-    {
-      "rule_id": "javascript/HTTPSourceWithUncheckedType",
-      "uri": "routes/vulnCodeSnippet.ts",
-      "line": 64,
-      "level": "note",
-      "cwes": [
-        "CWE-1287"
-      ]
-    },
-    {
-      "rule_id": "javascript/HTTPSourceWithUncheckedType",
-      "uri": "routes/vulnCodeSnippet.ts",
-      "line": 66,
-      "level": "note",
-      "cwes": [
-        "CWE-1287"
-      ]
-    },
-    {
-      "rule_id": "javascript/HTTPSourceWithUncheckedType",
-      "uri": "server.ts",
-      "line": 410,
-      "level": "note",
-      "cwes": [
-        "CWE-1287"
-      ]
-    },
-    {
-      "rule_id": "javascript/HTTPSourceWithUncheckedType",
-      "uri": "server.ts",
-      "line": 411,
-      "level": "note",
-      "cwes": [
-        "CWE-1287"
-      ]
-    },
-    {
-      "rule_id": "javascript/HTTPSourceWithUncheckedType",
-      "uri": "server.ts",
-      "line": 412,
-      "level": "note",
-      "cwes": [
-        "CWE-1287"
       ]
     }
   ],
@@ -1108,6 +992,16 @@
       "cwe": 639,
       "vulnerable_files": [
         "routes/basket.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "challenge_key": "weirdCryptoChallenge",
+      "challenge_name": "Weird Crypto",
+      "category": "Cryptographic Issues",
+      "cwe": 916,
+      "vulnerable_files": [
+        "lib/insecurity.ts"
       ],
       "confidence": "high"
     },
